@@ -24,6 +24,7 @@ public class StatusBoard {
             sbf.setLocationRelativeTo(null);
             sbf.setVisible(true);
         });
+
     }
     
 }

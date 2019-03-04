@@ -7,6 +7,7 @@ import statusboard.CrewMemberObject;
 
 public class RosterDataBaseHelper {
      static Connection c = null;
+     static DataBaseHelper dbh;
      private static LoggingDataBaseHelper logs;
      static Constants con = new Constants();
      // roster schema names. Do not change once database is initialized
@@ -21,14 +22,9 @@ public class RosterDataBaseHelper {
      private final String STATUS = "STATUS";
 
     public void openDatabase() {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            c = DriverManager.getConnection(con.getDatabaseName());
-            logs = new LoggingDataBaseHelper(c);
-        } catch ( ClassNotFoundException | SQLException e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
-        }
+        dbh = new DataBaseHelper();
+        c = dbh.getDatabaseConnection();
+        logs = new LoggingDataBaseHelper(c);
     }
 
     public boolean createRosterTable() {
@@ -262,8 +258,6 @@ public class RosterDataBaseHelper {
         }
         return cm;
     }
-
-    
     
       private void populateTestData() {
         

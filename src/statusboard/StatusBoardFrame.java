@@ -13,7 +13,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -25,6 +24,7 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToggleButton;
+import javax.swing.JViewport;
 import javax.swing.UIManager;
 import javax.swing.plaf.UIResource;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -34,8 +34,6 @@ import javax.swing.table.TableColumn;
 import statusboard.models.*;
 
 public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDispatcher {
-    private final ArrayList<JTable> tables = new ArrayList<>();
-    private final ArrayList<CrewListModel> models = new ArrayList<>();
     private static RosterDataBaseHelper DB;
     private final static Constants CON = new Constants();
     private static StringBuilder keyInput = new StringBuilder();
@@ -45,50 +43,25 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
     public static Color backgroundColor = UIManager.getColor("Panel.background");
     public static Color foregroundColor = UIManager.getColor(Color.BLACK);
     
-    private final CrewListModel coModel;
-    private final CrewListModel xoModel;
-    private final CrewListModel officerModel;
-    private final CrewListModel chiefModel;
-    private final CrewListModel engineeringModel;
-    private final CrewListModel operationsModel;
-    private final CrewListModel deckModel;
-    private final CrewListModel supportModel;
-
+    private final CrewListModel coModel, xoModel, officerModel, chiefModel, engineeringModel, operationsModel, deckModel, supportModel;
     
     /**
      * Creates new form StatusBoardFrame
      */
     public StatusBoardFrame() {
         DB = RosterDataBaseHelper.getInstance();
-        coModel = new statusboard.models.CrewListModel(CON.COMMANDING_OFFICER);
-        xoModel = new statusboard.models.CrewListModel(CON.EXECUTIVE_OFFICER);
-        officerModel = new statusboard.models.CrewListModel(CON.OFFICERS);
-        chiefModel = new statusboard.models.CrewListModel(CON.CHIEFS);
-        engineeringModel = new statusboard.models.CrewListModel(CON.ENGINEERING);
-        operationsModel = new statusboard.models.CrewListModel(CON.OPERATIONS);
-        deckModel = new statusboard.models.CrewListModel(CON.DECK);
-        supportModel = new statusboard.models.CrewListModel(CON.SUPPORT);
+        coModel = new CrewListModel(CON.COMMANDING_OFFICER);
+        xoModel = new CrewListModel(CON.EXECUTIVE_OFFICER);
+        officerModel = new CrewListModel(CON.OFFICERS);
+        chiefModel = new CrewListModel(CON.CHIEFS);
+        engineeringModel = new CrewListModel(CON.ENGINEERING);
+        operationsModel = new CrewListModel(CON.OPERATIONS);
+        deckModel = new CrewListModel(CON.DECK);
+        supportModel = new CrewListModel(CON.SUPPORT);
   
         initComponents();        
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        tables.add(CON.getPos(CON.COMMANDING_OFFICER), coTable);
-        tables.add(CON.getPos(CON.EXECUTIVE_OFFICER), xoTable);
-        tables.add(CON.getPos(CON.OFFICERS), officersTable);
-        tables.add(CON.getPos(CON.CHIEFS), chiefsTable);
-        tables.add(CON.getPos(CON.ENGINEERING), engineeringTable);
-        tables.add(CON.getPos(CON.OPERATIONS), operationsTable);
-        tables.add(CON.getPos(CON.DECK), deckTable);
-        tables.add(CON.getPos(CON.SUPPORT), supportTable);
-        
-        models.add(CON.getPos(CON.COMMANDING_OFFICER), coModel);
-        models.add(CON.getPos(CON.EXECUTIVE_OFFICER), xoModel);
-        models.add(CON.getPos(CON.OFFICERS), officerModel);
-        models.add(CON.getPos(CON.CHIEFS), chiefModel);
-        models.add(CON.getPos(CON.ENGINEERING), engineeringModel);
-        models.add(CON.getPos(CON.OPERATIONS), operationsModel);
-        models.add(CON.getPos(CON.DECK), deckModel);
-        models.add(CON.getPos(CON.SUPPORT), supportModel);
-        
+
         setupTablesLAF();
         setupColors();
         if (getCutterName() != null) {
@@ -500,15 +473,16 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
 
 
  private void setupTablesLAF() {
-     for (int i = 0; i < tables.size(); i++) {
-         tables.get(i).setAutoResizeMode(0);
-         tables.get(i).setOpaque(false);
-         tables.get(i).setShowGrid(false);
-         tables.get(i).setDefaultRenderer(Boolean.class, new BooleanRenderer());
-         tables.get(i).setDefaultRenderer(String.class, new StringRenderer());
-         ((DefaultTableCellRenderer) tables.get(i).getDefaultRenderer(Object.class)).setOpaque(false);
+     for (int i = 0; i < 8; i++) {
+         JTable temp = getTable(i);
+         temp.setAutoResizeMode(0);
+        temp.setOpaque(false);
+         temp.setShowGrid(false);
+         temp.setDefaultRenderer(Boolean.class, new BooleanRenderer());
+         temp.setDefaultRenderer(String.class, new StringRenderer());
+         ((DefaultTableCellRenderer) temp.getDefaultRenderer(Object.class)).setOpaque(false);
           
-         DefaultTableColumnModel colModel = (DefaultTableColumnModel) tables.get(i).getColumnModel();
+         DefaultTableColumnModel colModel = (DefaultTableColumnModel) temp.getColumnModel();
          TableColumn col;
          col = colModel.getColumn(0);
          col.setPreferredWidth(0);
@@ -532,8 +506,6 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
      for (Component comp : jPanel1.getComponents()) {
            if (comp instanceof JScrollPane) {
                ((JScrollPane) comp).getViewport().setBackground(backgroundColor);
-           } else if (comp instanceof JTable) {
-               ((JTable) comp).repaint();
            } else if (comp instanceof JLabel) {
                ((JLabel) comp).setForeground(foregroundColor);
            } else if (comp instanceof JButton) {
@@ -561,8 +533,7 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
                     if (cm.getId() != 0 ) {
                         // a non-zero value indicates that the CrewMemberObject had the id and status filled by the db call.
                         DB.toggleCrewMemberStatusByScanner(cm, cm.isStatus());
-                        models.get(CON.getPos(cm.getDepartment())).populateRowsData(cm.getDepartment());
-                        models.get(CON.getPos(cm.getDepartment())).fireTableDataChanged();
+                        refreshDeptTable(cm.getDepartment());
                         lastScanNameLabel.setText(cm.getRank() + " " + cm.getLastName());
                         Date date = new Date();
                         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -628,14 +599,19 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
  }
 
  public void refreshDeptTable(String dept) {
-     models.get(CON.getPos(dept)).populateRowsData(dept);
-     models.get(CON.getPos(dept)).fireTableDataChanged();
+     getModel(dept).refreshRows();
+     getModel(dept).fireTableDataChanged();
  }
  
- public void refreshAllTables() {
-        for (int i = 0; i < models.size(); i++) {
-           models.get(i).refreshRows();
-       }
+ public void refreshAllTables() {     
+        for (Component comp : jPanel1.getComponents()) {
+            if (comp instanceof JScrollPane) {
+                JScrollPane scrollPane = (JScrollPane) comp;
+                JViewport viewPort = scrollPane.getViewport(); 
+                JTable table = (JTable)viewPort.getView();
+                ((CrewListModel) table.getModel()).refreshRows();
+            }
+        }
  }
  
 private String getCutterName() {
@@ -646,6 +622,50 @@ private String getCutterName() {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
    return cutterName;
+}
+
+private CrewListModel getModel(String dept) { 
+    if (dept.equals(CON.getDepartmentByPos(0))) {
+        return coModel;
+    } else if (dept.equals(CON.getDepartmentByPos(1))) {
+        return xoModel;
+    } else if (dept.equals(CON.getDepartmentByPos(2))) {
+        return officerModel;
+    } else if (dept.equals(CON.getDepartmentByPos(3))) {
+        return chiefModel;
+    } else if (dept.equals(CON.getDepartmentByPos(4))) {
+        return engineeringModel;
+    } else if (dept.equals(CON.getDepartmentByPos(5))) {
+        return operationsModel;
+    } else if (dept.equals(CON.getDepartmentByPos(6))) {
+        return deckModel;
+    } else if (dept.equals(CON.getDepartmentByPos(7))) {
+        return supportModel;
+    }
+    return null;
+}
+
+private JTable getTable(int pos) { 
+        switch (pos) {
+            case 0:
+                return coTable;
+            case 1:
+                return xoTable;
+            case 2:
+                return officersTable;
+            case 3:
+                return chiefsTable;
+            case 4:
+                return engineeringTable;
+            case 5:
+                return operationsTable;
+            case 6:
+                return deckTable;
+            case 7:
+                return supportTable;
+            default:
+                return null;
+        }
 }
  
  public static class BooleanRenderer extends JLabel implements TableCellRenderer,  UIResource {

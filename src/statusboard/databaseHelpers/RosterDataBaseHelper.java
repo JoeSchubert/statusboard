@@ -75,7 +75,6 @@ public class RosterDataBaseHelper {
             populateTestData();
         } catch ( SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
             return false;
         }
         return true;
@@ -91,7 +90,6 @@ public class RosterDataBaseHelper {
             return tables.next();
         } catch ( SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
         }
         // return false in case the try block fails.
         return false;
@@ -136,7 +134,6 @@ public class RosterDataBaseHelper {
                 return true;
         } catch ( SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
         }
         return false;
     }
@@ -160,7 +157,6 @@ public class RosterDataBaseHelper {
             }
         } catch ( SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
         }
         return false;
     }
@@ -204,7 +200,6 @@ public class RosterDataBaseHelper {
             return true;
         } catch ( SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
         }
         return false;
     }
@@ -224,7 +219,6 @@ public class RosterDataBaseHelper {
             }
         } catch ( SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
         }
         
         return crewMembers;
@@ -245,7 +239,6 @@ public class RosterDataBaseHelper {
             }
         } catch ( SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
         }
         return cm;
     }
@@ -265,7 +258,6 @@ public class RosterDataBaseHelper {
             }
         } catch ( SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
         }
         return crew;
     }
@@ -285,7 +277,6 @@ public class RosterDataBaseHelper {
                 .setLastScan(result.getString(LAST_SCAN));
             } catch ( SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
-            System.exit(0);
         }
         return cm;
     }

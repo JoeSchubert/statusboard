@@ -52,7 +52,6 @@ public class LoggingDataBaseHelper {
                 return tables.next();
             } catch ( SQLException e) {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
-                System.exit(0);
             }
         }
         return false;
@@ -77,7 +76,6 @@ public class LoggingDataBaseHelper {
                 pstmt.executeUpdate();
             } catch ( SQLException e) {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
-                System.exit(0);
             }
         }
     }

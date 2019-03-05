@@ -11,7 +11,8 @@ public class DataBaseHelper {
 
     private static Connection c = null;
     static Constants con = new Constants();
-    static int version = -1;
+    static int existingVersion = -1;
+    private static final int currentVersion = 1;
 
     public DataBaseHelper() {
         if (c == null) {
@@ -36,7 +37,7 @@ public class DataBaseHelper {
 
     public int getDatabaseVersion() {
         // only call the SQL query if we have not already populated the version.
-        if (version == -1) {
+        if (existingVersion == -1) {
             if (c == null) {
                 openDatabase();
             }
@@ -47,36 +48,29 @@ public class DataBaseHelper {
                 String sql = "PRAGMA user_version;";
                 result = stmt.executeQuery(sql);
                 while (result.next()) {
-                    version = result.getInt(1);
+                    existingVersion = result.getInt(1);
                 }
                 stmt.close();
             } catch (SQLException e) {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
             }
         }
-        System.out.println("Returning version: " + version);
-        return version;
+        setDatabaseVersion();
+        return existingVersion;
     }
 
-    public int incrementDatabaseVersion() {
+    public int setDatabaseVersion() {
         if (c == null) {
             openDatabase();
         }
-        // ensure version has been populated
-        if (version == 0) {
-            getDatabaseVersion();
-        }
-        version++;
-        System.out.println("new version: " + version);
         try {
             Statement stmt = c.createStatement();
             stmt.closeOnCompletion();
-            stmt.execute("PRAGMA user_version = " + version);
-            System.out.println("After execute");
+            stmt.execute("PRAGMA user_version = " + currentVersion);
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-        return version;
+        return existingVersion;
     }
 
 }

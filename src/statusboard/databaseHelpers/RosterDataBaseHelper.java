@@ -40,6 +40,7 @@ public class RosterDataBaseHelper {
      
      public static RosterDataBaseHelper getInstance() {
          if (rdbh == null) {
+             dbh = new DataBaseHelper();
              rdbh = new RosterDataBaseHelper();
          } 
          return rdbh;

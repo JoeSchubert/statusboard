@@ -666,6 +666,8 @@ private String getCutterName() {
                     this.setBackground(Color.GREEN);
                 }
             }
+            CrewListModel c = (CrewListModel) table.getModel();
+            this.setToolTipText(c.getLastScan(row));
             return this;
         }
  }

@@ -25,6 +25,10 @@ public class CrewListModel extends AbstractTableModel {
         }
     }
     
+    public String getLastScan(int row) {
+        return "Last Status Change: " + rows.get(row).getLastScan();
+    }
+
     public void refreshRows() {
         populateRowsData(this.dept);
         this.fireTableDataChanged();

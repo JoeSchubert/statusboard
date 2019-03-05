@@ -5,7 +5,6 @@ import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableColumn;
-import statusboard.StatusBoardFrame;
 import statusboard.databaseHelpers.RosterDataBaseHelper;
 import statusboard.models.UserListModel;
 
@@ -17,7 +16,7 @@ public class UserList extends javax.swing.JPanel {
         private final JDialog jdg;
         private final UserListModel userListModel;
         private final JDialog aemDialog = new JDialog();
-        private final RosterDataBaseHelper db = new RosterDataBaseHelper();
+        private final RosterDataBaseHelper db = RosterDataBaseHelper.getInstance();
 
 
     /**

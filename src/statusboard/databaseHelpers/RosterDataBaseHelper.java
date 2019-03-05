@@ -1,11 +1,13 @@
 package statusboard.databaseHelpers;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import statusboard.Constants;
 import statusboard.CrewMemberObject;
 
 public class RosterDataBaseHelper {
+    private static RosterDataBaseHelper rdbh = null;
      static Connection c = null;
      static DataBaseHelper dbh;
      private static LoggingDataBaseHelper logs;
@@ -20,11 +22,27 @@ public class RosterDataBaseHelper {
      private final String DEPT = "DEPARTMENT";
      private final String BARCODE = "BARCODE";
      private final String STATUS = "STATUS";
+     private final String LAST_SCAN = "LAST_SCAN";
+    // This is the minimum version that is required for schema
+    private final int DB_VERSION = 1;
+     
      
      public RosterDataBaseHelper() {
-        if (existsTableRoster() == false) {
-           createRosterTable();
-        }
+            if (existsTableRoster() == false) {
+               createRosterTable();
+            } else {
+                int x = dbh.getDatabaseVersion();
+                if (x < DB_VERSION) {
+                    updateTable(x);
+                }
+            }
+     }
+     
+     public static RosterDataBaseHelper getInstance() {
+         if (rdbh == null) {
+             rdbh = new RosterDataBaseHelper();
+         } 
+         return rdbh;
      }
 
     public void openDatabase() {
@@ -49,7 +67,8 @@ public class RosterDataBaseHelper {
                     LNAME + " TEXT NOT NULL, " +
                     DEPT + " TEXT NOT NULL, " +
                     BARCODE + " TEXT NOT NULL, " +
-                    STATUS + " BOOLEAN NOT NULL)";
+                    STATUS + " BOOLEAN NOT NULL," +
+                    LAST_SCAN + " TEXT);";
             stmt.executeUpdate(sql);
             stmt.close();
             populateTestData();
@@ -171,11 +190,15 @@ public class RosterDataBaseHelper {
         if (c == null) {
             openDatabase();
         }
-        try {           
+        try { 
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            String ts = sdf.format(timestamp);
             boolean newStatus = status != true;
-            String sql =  "UPDATE roster SET " + STATUS + "= ? WHERE " + ID + "= " + id;
+            String sql =  "UPDATE roster SET " + STATUS + "= ? , " + LAST_SCAN + "=? WHERE " + ID + "= " + id;
             PreparedStatement pstmt = c.prepareStatement(sql);
             pstmt.setBoolean(1, newStatus);
+            pstmt.setString(2, ts);
             pstmt.executeUpdate();
             return true;
         } catch ( SQLException e) {
@@ -257,7 +280,8 @@ public class RosterDataBaseHelper {
                 .setLastName(result.getString(LNAME))
                 .setDepartment(result.getString(DEPT))
                 .setBarcode(result.getString(BARCODE))
-                .setStatus(result.getBoolean(STATUS));
+                .setStatus(result.getBoolean(STATUS))
+                .setLastScan(result.getString(LAST_SCAN));
             } catch ( SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
             System.exit(0);
@@ -289,5 +313,22 @@ public class RosterDataBaseHelper {
         insertRow(0, "E6", "SK1", "Test", "Support" + i, "Support", "abc123def456", Boolean.TRUE);
         }
     }
-    
+ 
+      private void updateTable(int v) {
+         if (c== null) {
+            openDatabase();
+        }
+         try {
+            if (v < 1) {
+              Statement stmt = c.createStatement();
+              stmt.closeOnCompletion();
+              String sql = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN " + LAST_SCAN + " TEXT";
+              System.out.println("Altering Table: " + sql);
+              stmt.execute(sql);
+            } 
+          } catch ( SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+}
+      
 }

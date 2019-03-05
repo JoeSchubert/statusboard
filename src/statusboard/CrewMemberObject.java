@@ -9,6 +9,7 @@ public class CrewMemberObject {
     private String department;
     private String barcode;
     private boolean status;
+    private String lastScan = "unkown";
 
     public int getId() {
         return this.id;
@@ -40,6 +41,10 @@ public class CrewMemberObject {
 
     public boolean isStatus() {
         return this.status;
+    }
+    
+    public String getLastScan() {
+        return lastScan;
     }
 
     public CrewMemberObject setId(int id) {
@@ -79,6 +84,14 @@ public class CrewMemberObject {
     public CrewMemberObject setStatus(boolean status) {
         this.status = status;
         return this;
+    }
+     
+    public void setLastScan(String lastscan) {
+        if (lastscan == null  || lastscan.isEmpty()) {
+            this.lastScan = "unkown";
+        } else {
+            this.lastScan = lastscan;
+        }
     }
        
 }

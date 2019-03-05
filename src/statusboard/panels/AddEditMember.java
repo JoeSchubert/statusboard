@@ -9,7 +9,7 @@ import statusboard.StatusBoard;
 
 public class AddEditMember extends javax.swing.JPanel {
     private static  Constants con = new Constants();
-    private static  RosterDataBaseHelper db = new RosterDataBaseHelper();
+    private static  RosterDataBaseHelper db = RosterDataBaseHelper.getInstance();
     private final JDialog jdg;
     private CrewMemberObject crewMember = null;
 

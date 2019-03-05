@@ -11,7 +11,7 @@ public class UserListModel extends AbstractTableModel {
     private List<CrewMemberObject> rows = new ArrayList<>();
     
     public UserListModel() {
-        db = new RosterDataBaseHelper();
+        db  = RosterDataBaseHelper.getInstance();
         rows = db.getAllMembers();
     }
     

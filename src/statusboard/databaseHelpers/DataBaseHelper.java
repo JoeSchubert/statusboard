@@ -12,7 +12,7 @@ public class DataBaseHelper {
     private static Connection c = null;
     static Constants con = new Constants();
     static int existingVersion = -1;
-    private static final int currentVersion = 1;
+    private static final int CURRENT_VERSION = 1;
 
     public DataBaseHelper() {
         if (c == null) {
@@ -59,18 +59,17 @@ public class DataBaseHelper {
         return existingVersion;
     }
 
-    public int setDatabaseVersion() {
+    public void setDatabaseVersion() {
         if (c == null) {
             openDatabase();
         }
         try {
             Statement stmt = c.createStatement();
             stmt.closeOnCompletion();
-            stmt.execute("PRAGMA user_version = " + currentVersion);
+            stmt.execute("PRAGMA user_version = " + CURRENT_VERSION);
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-        return existingVersion;
     }
 
 }

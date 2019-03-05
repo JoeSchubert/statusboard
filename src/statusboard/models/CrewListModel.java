@@ -14,7 +14,7 @@ public class CrewListModel extends AbstractTableModel {
     private final String dept;
     
     public CrewListModel(String department) {
-        db = new RosterDataBaseHelper();
+        db = RosterDataBaseHelper.getInstance();
         dept = department;
         populateRowsData(department);
     }

@@ -36,7 +36,7 @@ import statusboard.models.*;
 public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDispatcher {
     private final ArrayList<JTable> tables = new ArrayList<>();
     private final ArrayList<CrewListModel> models = new ArrayList<>();
-    private static final RosterDataBaseHelper DB = new RosterDataBaseHelper();
+    private static RosterDataBaseHelper DB;
     private final static Constants CON = new Constants();
     private static StringBuilder keyInput = new StringBuilder();
     private AddEditMember aem;
@@ -59,6 +59,7 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
      * Creates new form StatusBoardFrame
      */
     public StatusBoardFrame() {
+        DB = RosterDataBaseHelper.getInstance();
         coModel = new statusboard.models.CrewListModel(CON.COMMANDING_OFFICER);
         xoModel = new statusboard.models.CrewListModel(CON.EXECUTIVE_OFFICER);
         officerModel = new statusboard.models.CrewListModel(CON.OFFICERS);

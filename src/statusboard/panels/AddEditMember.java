@@ -227,7 +227,6 @@ public class AddEditMember extends javax.swing.JPanel {
         }
         // add an extra check to this if/else block because the model may not have been set yet if the previous block fails.
         if (rankComboBox.getModel() == null || rankComboBox.getSelectedItem() == null || rankComboBox.getSelectedItem().toString().equals("") ) {
-            System.out.println(rankComboBox.getSelectedIndex());
             rankLabel.setForeground(Color.RED);
             failure = true;
         } else {

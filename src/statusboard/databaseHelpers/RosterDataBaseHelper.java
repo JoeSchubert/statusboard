@@ -20,6 +20,12 @@ public class RosterDataBaseHelper {
      private final String DEPT = "DEPARTMENT";
      private final String BARCODE = "BARCODE";
      private final String STATUS = "STATUS";
+     
+     public RosterDataBaseHelper() {
+        if (existsTableRoster() == false) {
+           createRosterTable();
+        }
+     }
 
     public void openDatabase() {
         dbh = new DataBaseHelper();
@@ -27,7 +33,7 @@ public class RosterDataBaseHelper {
         logs = new LoggingDataBaseHelper(c);
     }
 
-    public boolean createRosterTable() {
+    private boolean createRosterTable() {
         if (c == null) {
             openDatabase();
         }
@@ -55,7 +61,7 @@ public class RosterDataBaseHelper {
         return true;
     }
 
-    public boolean existsTableRoster() {
+    private boolean existsTableRoster() {
         if (c == null) {
             openDatabase();
         }

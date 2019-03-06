@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import statusboard.Constants;
 import statusboard.CrewMemberObject;
+import statusboard.StatusBoard;
 
 public class RosterDataBaseHelper {
     private static RosterDataBaseHelper rdbh = null;
@@ -197,6 +198,7 @@ public class RosterDataBaseHelper {
             pstmt.setBoolean(1, newStatus);
             pstmt.setString(2, ts);
             pstmt.executeUpdate();
+            StatusBoard.sbf.setNumberAfloatLabel(getNumberAfloat());
             return true;
         } catch ( SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
@@ -279,6 +281,25 @@ public class RosterDataBaseHelper {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         return cm;
+    }
+    
+    public String getNumberAfloat() {
+        if (c== null) {
+            openDatabase();
+        }
+        String num = "Number Afloat: 0";
+        try {
+            Statement stmt = c.createStatement();
+            ResultSet result;
+            String sql = "SELECT COUNT(*) as count_name from " + TABLE_NAME + " where " + STATUS + " = true;";
+            result = stmt.executeQuery(sql);
+            while (result.next()) {
+               num = "Members Afloat: " + String.format("%02d", result.getInt("count_name"));
+            }
+        } catch ( SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return num;
     }
     
       private void populateTestData() {

@@ -66,6 +66,7 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
         if (getCutterName() != null) {
             cutterLabel.setText(getCutterName());
         }
+        setNumberAfloatLabel(DB.getNumberAfloat());
         
     final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
     executorService.scheduleAtFixedRate(() -> {
@@ -118,6 +119,7 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
         lastScanTimeLabel = new javax.swing.JLabel();
         timeLabel = new javax.swing.JLabel();
         nightModeToggle = new javax.swing.JToggleButton();
+        numberAfloat = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -277,6 +279,8 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
             }
         });
 
+        numberAfloat.setText("Members Afloat: XX");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -337,7 +341,9 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(cutterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(nightModeToggle, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(nightModeToggle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(numberAfloat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -354,8 +360,11 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
                             .addComponent(commandingOfficerJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(executiveOfficerJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addComponent(cutterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nightModeToggle))
-                .addGap(18, 18, 18)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(nightModeToggle)
+                        .addGap(18, 18, 18)
+                        .addComponent(numberAfloat)))
+                .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -459,6 +468,7 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
     private javax.swing.JButton logsButton;
     private javax.swing.JButton managerUsersButton;
     private javax.swing.JToggleButton nightModeToggle;
+    private javax.swing.JLabel numberAfloat;
     private javax.swing.JScrollPane officersJScrollPane;
     private javax.swing.JLabel officersLabel;
     private javax.swing.JTable officersTable;
@@ -654,6 +664,10 @@ private JTable getTable(int pos) {
             default:
                 return null;
         }
+}
+
+public void setNumberAfloatLabel(String text) {
+    numberAfloat.setText(text);
 }
  
  public static class BooleanRenderer extends JLabel implements TableCellRenderer,  UIResource {

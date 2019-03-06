@@ -1,9 +1,10 @@
 package statusboard.panels;
 
 import javax.swing.JDialog;
+import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableColumn;
-import statusboard.databaseHelpers.LoggingDataBaseHelper;
+import javax.swing.table.TableRowSorter;
 import statusboard.models.LogsListModel;
 
 /**
@@ -13,9 +14,7 @@ import statusboard.models.LogsListModel;
 public class LogsList extends javax.swing.JPanel {
         private final JDialog jdg;
         private final LogsListModel logsListModel;
-        private final JDialog aemDialog = new JDialog();
-        private final LoggingDataBaseHelper db = LoggingDataBaseHelper.getInstance();
-
+        private TableRowSorter<LogsListModel> sorter;
 
     /**
      * Creates new form UserList
@@ -27,6 +26,8 @@ public class LogsList extends javax.swing.JPanel {
         initComponents();
         logsListTable.setAutoResizeMode(0);
         logsListTable.setOpaque(false);
+        sorter = new TableRowSorter<LogsListModel>(logsListModel);
+        logsListTable.setRowSorter(sorter);
         DefaultTableColumnModel colModel = (DefaultTableColumnModel) logsListTable.getColumnModel();
 
          TableColumn col;
@@ -60,6 +61,9 @@ public class LogsList extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         logsListTable = new javax.swing.JTable();
+        filterText = new javax.swing.JTextField();
+        filterButton = new javax.swing.JButton();
+        clearFilterButton = new javax.swing.JButton();
 
         logsListTable.setModel(logsListModel);
         logsListTable.setColumnSelectionAllowed(true);
@@ -80,13 +84,41 @@ public class LogsList extends javax.swing.JPanel {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        filterText.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterTextActionPerformed(evt);
+            }
+        });
+
+        filterButton.setText("Filter");
+        filterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterButtonActionPerformed(evt);
+            }
+        });
+
+        clearFilterButton.setText("Clear Filter");
+        clearFilterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clearFilterButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(filterText, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(filterButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(clearFilterButton)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -94,16 +126,51 @@ public class LogsList extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(filterText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filterButton)
+                    .addComponent(clearFilterButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void filterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterButtonActionPerformed
+        filterLogs();
+    }//GEN-LAST:event_filterButtonActionPerformed
+
+    private void clearFilterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearFilterButtonActionPerformed
+        clearFilter();
+    }//GEN-LAST:event_clearFilterButtonActionPerformed
+
+    private void filterTextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterTextActionPerformed
+        filterLogs();
+    }//GEN-LAST:event_filterTextActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton clearFilterButton;
+    private javax.swing.JButton filterButton;
+    private javax.swing.JTextField filterText;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable logsListTable;
     // End of variables declaration//GEN-END:variables
+
+    private void filterLogs() {
+        RowFilter<LogsListModel, Object> rf = null;
+        try {
+            rf = RowFilter.regexFilter("(?i)" + filterText.getText());
+        } catch (java.util.regex.PatternSyntaxException e) {
+            return;
+        }
+        sorter.setRowFilter(rf);
+    }
+    
+    private void clearFilter() {
+        sorter.setRowFilter(null);
+        filterText.setText("");
+    }
 
 
 }

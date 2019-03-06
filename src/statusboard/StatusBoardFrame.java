@@ -619,7 +619,7 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
   private void displayLogList() {
      logsList = new LogsList(jdg);
     jdg.setAutoRequestFocus(true);
-    jdg.setSize(800, 500);
+    jdg.setSize(800, 550);
     jdg.setResizable(true);
     jdg.add(logsList);
         jdg.addWindowListener(new WindowAdapter() {
@@ -629,6 +629,7 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
                 jdg.dispose();
             }
         });
+        jdg.pack();
     jdg.setLocationRelativeTo(null);
     jdg.setVisible(true);
  }

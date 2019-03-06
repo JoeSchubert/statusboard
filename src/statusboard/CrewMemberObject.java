@@ -9,7 +9,7 @@ public class CrewMemberObject {
     private String department;
     private String barcode;
     private boolean status;
-    private String lastScan = "unkown";
+    private String lastScan = "unknown";
 
     public int getId() {
         return this.id;

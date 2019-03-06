@@ -26,6 +26,7 @@ public class LoggingDataBaseHelper {
         if (existsTableLogs() == false) {
             createLogsTable();
         }
+        pruneLogs();
     }
     
     public static LoggingDataBaseHelper getInstance() {
@@ -126,5 +127,18 @@ public class LoggingDataBaseHelper {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
         return log;
+    }
+    
+    public void pruneLogs() {
+        if (c == null) {
+            openDatabase();
+        }
+        try {
+            Statement stmt = c.createStatement();
+            stmt.closeOnCompletion();
+            stmt.execute("DELETE FROM " + TABLE_NAME + " WHERE " + DATETIME + "< datetime('now', '-30 days');");
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
     }
 }

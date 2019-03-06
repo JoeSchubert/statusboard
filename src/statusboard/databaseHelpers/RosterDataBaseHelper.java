@@ -315,7 +315,6 @@ public class RosterDataBaseHelper {
               Statement stmt = c.createStatement();
               stmt.closeOnCompletion();
               String sql = "ALTER TABLE " + TABLE_NAME + " ADD COLUMN " + LAST_SCAN + " TEXT";
-              System.out.println("Altering Table: " + sql);
               stmt.execute(sql);
             } 
           } catch ( SQLException e) {

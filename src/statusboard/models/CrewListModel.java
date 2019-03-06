@@ -19,7 +19,7 @@ public class CrewListModel extends AbstractTableModel {
         populateRowsData(department);
     }
 
-    public final void populateRowsData(String department) {
+    private void populateRowsData(String department) {
         if (c.isValidDept(department)) {
             this.rows = db.getMembersByDept(department);
         }

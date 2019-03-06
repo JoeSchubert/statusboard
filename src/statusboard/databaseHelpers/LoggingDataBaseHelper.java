@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import statusboard.LogObject;
 
 public class LoggingDataBaseHelper {
     private static LoggingDataBaseHelper ldbh = null;
@@ -33,6 +35,11 @@ public class LoggingDataBaseHelper {
          } 
          return ldbh;
      }
+    
+    public void openDatabase() {
+        dbh = new DataBaseHelper();
+        c = dbh.getDatabaseConnection();
+    }
     
     private boolean createLogsTable() {
         if (c != null) {
@@ -89,5 +96,35 @@ public class LoggingDataBaseHelper {
             }
         }
     }
+    public ArrayList<LogObject> getAllEntries() {
+        if (c== null) {
+            openDatabase();
+        }
+        ArrayList<LogObject> logs =  new ArrayList<>();
+        try {
+            Statement stmt = c.createStatement();
+            ResultSet result;
+            String sql = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + DATETIME + " DESC";
+            result = stmt.executeQuery(sql);
+            while (result.next()) {
+               logs.add(populateLogObject(result));
+            }
+        } catch ( SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return logs;
+    }
     
+    private LogObject populateLogObject(ResultSet result) {
+        LogObject log = new LogObject();
+        try {
+                // Read the values from the query into a LogObject
+                log.setDatetime(result.getString(DATETIME))
+                .setEvent(result.getString(EVENT))
+                .setDetail(result.getString(DETAIL));
+            } catch ( SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+        return log;
+    }
 }

@@ -103,12 +103,10 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="supportJScrollPane" min="-2" pref="189" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="timeLabel" min="-2" pref="113" max="-2" attributes="0"/>
-                                          <Component id="managerUsersButton" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <Component id="logsButton" min="-2" pref="113" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="timeLabel" max="32767" attributes="0"/>
+                                      <Component id="managerUsersButton" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="logsButton" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -526,8 +524,10 @@
         <Component class="javax.swing.JButton" name="logsButton">
           <Properties>
             <Property name="text" type="java.lang.String" value="Logs"/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="logsButtonActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="lastScanColorBox">
           <Properties>

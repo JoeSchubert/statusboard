@@ -31,6 +31,7 @@ import statusboard.databaseHelpers.RosterDataBaseHelper;
 import statusboard.models.*;
 import statusboard.panels.AddEditMember;
 import statusboard.panels.UserList;
+import statusboard.panels.LogsList;
 
 public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDispatcher {
     private static RosterDataBaseHelper DB;
@@ -38,6 +39,7 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
     private static StringBuilder keyInput = new StringBuilder();
     private AddEditMember aem;
     private UserList userList;
+    private LogsList logsList;
     private final JDialog jdg = new JDialog();
     public static Color backgroundColor = UIManager.getColor("Panel.background");
     public static Color foregroundColor = UIManager.getColor(Color.BLACK);
@@ -260,7 +262,11 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
         });
 
         logsButton.setText("Logs");
-        logsButton.setEnabled(false);
+        logsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logsButtonActionPerformed(evt);
+            }
+        });
 
         lastScanColorBox.setToolTipText("");
 
@@ -332,11 +338,10 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(supportJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(timeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(managerUsersButton, javax.swing.GroupLayout.Alignment.TRAILING))
-                                    .addComponent(logsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(timeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(managerUsersButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(logsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(cutterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE)
@@ -441,6 +446,11 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
         setupColors();
 
     }//GEN-LAST:event_nightModeToggleActionPerformed
+
+    private void logsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logsButtonActionPerformed
+        // TODO add your handling code here:
+        displayLogList();
+    }//GEN-LAST:event_logsButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane chiefsJScrollPane;
@@ -595,6 +605,23 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
     jdg.setSize(280, 500);
     jdg.setResizable(false);
     jdg.add(userList);
+        jdg.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                jdg.getContentPane().removeAll();
+                jdg.dispose();
+            }
+        });
+    jdg.setLocationRelativeTo(null);
+    jdg.setVisible(true);
+ }
+ 
+  private void displayLogList() {
+     logsList = new LogsList(jdg);
+    jdg.setAutoRequestFocus(true);
+    jdg.setSize(800, 500);
+    jdg.setResizable(true);
+    jdg.add(logsList);
         jdg.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {

@@ -47,7 +47,7 @@ public class Constants {
     }
     
     public String[] getPayGrades() {
-        String[] pg = {"", "O6" , "O5" , "O4", "O3", "O2", "O1", "W4", "W3", "W2", "E8", "E7", "E6", "E5", "E4", "E3", "E2", "E1"};
+        String[] pg = {"", "O6" , "O5" , "O4", "O3", "O2", "O1", "W4", "W3", "W2", "E8", "E7", "E6", "E5", "E4", "E3", "E2"};
         return pg;
     }
     

@@ -9,9 +9,9 @@ import java.awt.KeyEventDispatcher;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.Executors;
@@ -617,7 +617,8 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
 private String getCutterName() {
    String cutterName = null;
         try {
-            cutterName = new String(Files.readAllBytes(Paths.get("cutter name.txt")));
+            BufferedReader br = new BufferedReader(new FileReader("cutter name.txt"));
+            cutterName = br.readLine();
         } catch (IOException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }

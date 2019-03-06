@@ -1,8 +1,5 @@
 package statusboard;
 
-import statusboard.databaseHelpers.RosterDataBaseHelper;
-import statusboard.panels.AddEditMember;
-import statusboard.panels.UserList;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.KeyEventDispatcher;
@@ -24,14 +21,16 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToggleButton;
-import javax.swing.JViewport;
 import javax.swing.UIManager;
 import javax.swing.plaf.UIResource;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
+import statusboard.databaseHelpers.RosterDataBaseHelper;
 import statusboard.models.*;
+import statusboard.panels.AddEditMember;
+import statusboard.panels.UserList;
 
 public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDispatcher {
     private static RosterDataBaseHelper DB;

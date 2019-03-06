@@ -10,6 +10,7 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
 public class LoggingDataBaseHelper {
+    private static LoggingDataBaseHelper ldbh = null;
     private static Connection c = null;
     static DataBaseHelper dbh;
     private static final String TABLE_NAME = "LOGS";
@@ -24,6 +25,14 @@ public class LoggingDataBaseHelper {
             createLogsTable();
         }
     }
+    
+    public static LoggingDataBaseHelper getInstance() {
+         if (ldbh == null) {
+             dbh = new DataBaseHelper();
+             ldbh = new LoggingDataBaseHelper();
+         } 
+         return ldbh;
+     }
     
     private boolean createLogsTable() {
         if (c != null) {

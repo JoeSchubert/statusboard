@@ -49,7 +49,7 @@ public class RosterDataBaseHelper {
     public void openDatabase() {
         dbh = new DataBaseHelper();
         c = dbh.getDatabaseConnection();
-        logs = new LoggingDataBaseHelper();
+        logs = LoggingDataBaseHelper.getInstance();
     }
 
     private boolean createRosterTable() {

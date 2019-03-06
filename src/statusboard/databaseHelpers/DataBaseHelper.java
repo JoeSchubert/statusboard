@@ -71,5 +71,18 @@ public class DataBaseHelper {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
     }
+    
+    public void vacuumDatabase() {
+        if (c == null) {
+            openDatabase();
+        }
+        try {
+            Statement stmt = c.createStatement();
+            stmt.closeOnCompletion();
+            stmt.execute("VACUUM");
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+    }
 
 }

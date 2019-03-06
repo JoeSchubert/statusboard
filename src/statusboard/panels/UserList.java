@@ -5,6 +5,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableColumn;
+import statusboard.StatusBoard;
 import statusboard.databaseHelpers.RosterDataBaseHelper;
 import statusboard.models.UserListModel;
 
@@ -151,6 +152,7 @@ public class UserList extends javax.swing.JPanel {
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         // TODO add your handling code here:
          db.deleteRow(userListModel.getMemberAtPos(userListTable.getSelectedRow()));
+         StatusBoard.sbf.refreshDeptTable(userListModel.getMemberAtPos(userListTable.getSelectedRow()).getDepartment());
          userListModel.refreshUserListModel();
     }//GEN-LAST:event_deleteButtonActionPerformed
 

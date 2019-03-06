@@ -589,7 +589,6 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
         jdg.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                refreshAllTables();
                 jdg.getContentPane().removeAll();
                 jdg.dispose();
             }
@@ -601,17 +600,6 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
  public void refreshDeptTable(String dept) {
      getModel(dept).refreshRows();
      getModel(dept).fireTableDataChanged();
- }
- 
- public void refreshAllTables() {     
-        for (Component comp : jPanel1.getComponents()) {
-            if (comp instanceof JScrollPane) {
-                JScrollPane scrollPane = (JScrollPane) comp;
-                JViewport viewPort = scrollPane.getViewport(); 
-                JTable table = (JTable)viewPort.getView();
-                ((CrewListModel) table.getModel()).refreshRows();
-            }
-        }
  }
  
 private String getCutterName() {

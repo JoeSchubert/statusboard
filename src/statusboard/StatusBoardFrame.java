@@ -33,7 +33,7 @@ import statusboard.panels.AddEditMember;
 import statusboard.panels.UserList;
 import statusboard.panels.LogsList;
 
-public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDispatcher {
+public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDispatcher {
     private static RosterDataBaseHelper DB;
     private final static Constants CON = new Constants();
     private static StringBuilder keyInput = new StringBuilder();

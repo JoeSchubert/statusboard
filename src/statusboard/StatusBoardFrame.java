@@ -65,8 +65,10 @@ public class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDisp
 
         setupTablesLAF();
         setupColors();
-        if (getCutterName() != null) {
-            cutterLabel.setText(getCutterName());
+        String cutterName = getCutterName();
+        if (cutterName != null) {
+            cutterLabel.setText(cutterName);
+            this.setTitle(cutterName);
         }
         setNumberAfloatLabel(DB.getNumberAfloat());
         

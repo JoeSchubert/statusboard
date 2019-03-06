@@ -172,5 +172,4 @@ public class LogsList extends javax.swing.JPanel {
         filterText.setText("");
     }
 
-
 }

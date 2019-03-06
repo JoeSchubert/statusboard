@@ -11,14 +11,15 @@ import java.text.SimpleDateFormat;
 
 public class LoggingDataBaseHelper {
     private static Connection c = null;
+    static DataBaseHelper dbh;
     private static final String TABLE_NAME = "LOGS";
     private static final String ID = "ID";
     private static final String DATETIME = "DATETIME";
     private static final String EVENT = "EVENT";
     private static final String DETAIL = "DETAIL";
     
-    public LoggingDataBaseHelper(Connection con) {
-        c = con;
+    public LoggingDataBaseHelper() {
+        c = dbh.getDatabaseConnection();
         if (existsTableLogs() == false) {
             createLogsTable();
         }

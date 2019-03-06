@@ -4,8 +4,8 @@ import java.awt.Color;
 import javax.swing.JDialog;
 import statusboard.Constants;
 import statusboard.CrewMemberObject;
-import statusboard.databaseHelpers.RosterDataBaseHelper;
 import statusboard.StatusBoard;
+import statusboard.databaseHelpers.RosterDataBaseHelper;
 
 public class AddEditMember extends javax.swing.JPanel {
     private static  Constants con = new Constants();

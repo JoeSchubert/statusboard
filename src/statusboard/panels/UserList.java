@@ -3,11 +3,13 @@ package statusboard.panels;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableColumn;
 import statusboard.StatusBoard;
 import static statusboard.StatusBoardFrame.backgroundColor;
 import static statusboard.StatusBoardFrame.foregroundColor;
+import statusboard.TableColumnAdjuster;
 import statusboard.databaseHelpers.RosterDataBaseHelper;
 import statusboard.models.UserListModel;
 
@@ -31,22 +33,9 @@ public class UserList extends javax.swing.JPanel {
         userListModel = new statusboard.models.UserListModel();
         initComponents();
         userListTable.setAutoResizeMode(0);
-          
-        DefaultTableColumnModel colModel = (DefaultTableColumnModel) userListTable.getColumnModel();
-
-         TableColumn col;
-         col = colModel.getColumn(0);
-         col.setPreferredWidth(40);
-         col.setWidth(40);
-
-         col = colModel.getColumn(1);
-         col.setPreferredWidth(100);
-         col.setWidth(100);
-
-         col = colModel.getColumn(2);
-         col.setPreferredWidth(100);
-         col.setWidth(100);
-
+        userListTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+         TableColumnAdjuster tca = new TableColumnAdjuster(userListTable, false);
+         tca.adjustColumns();
          jdg.pack();
          jdg.setLocationRelativeTo(null);
          setupColors();

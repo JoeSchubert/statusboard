@@ -1,6 +1,7 @@
 package statusboard.panels;
 
 import javax.swing.JDialog;
+import javax.swing.JTable;
 import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableColumn;
@@ -8,6 +9,7 @@ import javax.swing.table.TableRowSorter;
 import statusboard.Settings;
 import static statusboard.StatusBoardFrame.backgroundColor;
 import static statusboard.StatusBoardFrame.foregroundColor;
+import statusboard.TableColumnAdjuster;
 import statusboard.models.LogsListModel;
 
 /**
@@ -31,23 +33,12 @@ public class LogsList extends javax.swing.JPanel {
         logsListTable.setOpaque(false);
         sorter = new TableRowSorter<LogsListModel>(logsListModel);
         logsListTable.setRowSorter(sorter);
-        DefaultTableColumnModel colModel = (DefaultTableColumnModel) logsListTable.getColumnModel();
-
-         TableColumn col;
-         col = colModel.getColumn(0);
-         col.setPreferredWidth(120);
-         col.setWidth(120);
-
-         col = colModel.getColumn(1);
-         col.setPreferredWidth(100);
-         col.setWidth(100);
-
-         col = colModel.getColumn(2);
-         col.setPreferredWidth(500);
-         col.setWidth(500);
 
          jdg.pack();
          setupColors();
+         logsListTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+         TableColumnAdjuster tca = new TableColumnAdjuster(logsListTable, true);
+         tca.adjustColumns();
          jdg.setLocationRelativeTo(null);
          jdg.setVisible(true);
         

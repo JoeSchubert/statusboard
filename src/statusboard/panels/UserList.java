@@ -170,6 +170,7 @@ public class UserList extends javax.swing.JPanel {
         editButton.setForeground(foregroundColor);
         jScrollPane1.setBackground(backgroundColor);
         jScrollPane1.setForeground(foregroundColor);
+        jScrollPane1.getViewport().setBackground(backgroundColor);
         userListTable.setBackground(backgroundColor);
         userListTable.setForeground(foregroundColor);
         userListTable.setOpaque(false);

@@ -5,6 +5,9 @@ import javax.swing.RowFilter;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableRowSorter;
+import statusboard.Settings;
+import static statusboard.StatusBoardFrame.backgroundColor;
+import static statusboard.StatusBoardFrame.foregroundColor;
 import statusboard.models.LogsListModel;
 
 /**
@@ -44,6 +47,7 @@ public class LogsList extends javax.swing.JPanel {
          col.setWidth(500);
 
          jdg.pack();
+         setupColors();
          jdg.setLocationRelativeTo(null);
          jdg.setVisible(true);
         
@@ -172,4 +176,28 @@ public class LogsList extends javax.swing.JPanel {
         filterText.setText("");
     }
 
+        private void setupColors() {
+        this.setBackground(backgroundColor);
+        jdg.setBackground(backgroundColor);
+        jdg.setForeground(foregroundColor);
+        jPanel1.setBackground(backgroundColor);
+        jPanel1.setForeground(foregroundColor);
+        clearFilterButton.setBackground(backgroundColor);
+        clearFilterButton.setForeground(foregroundColor);
+        filterButton.setBackground(backgroundColor);
+        filterButton.setForeground(foregroundColor);
+        jScrollPane1.setBackground(backgroundColor);
+        jScrollPane1.setForeground(foregroundColor);
+        jScrollPane1.getViewport().setBackground(backgroundColor);
+        logsListTable.setBackground(backgroundColor);
+        logsListTable.setForeground(foregroundColor);
+        jScrollPane1.setBackground(backgroundColor);
+        jScrollPane1.setForeground(foregroundColor);
+        filterText.setBackground(backgroundColor);
+        filterText.setForeground(foregroundColor);
+        logsListTable.setOpaque(false);
+        logsListTable.getTableHeader().setBackground(backgroundColor);
+         logsListTable.getTableHeader().setForeground(foregroundColor);
+    }
+        
 }

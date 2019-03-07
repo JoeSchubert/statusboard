@@ -43,6 +43,7 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
     private final JDialog jdg = new JDialog();
     public static Color backgroundColor = UIManager.getColor("Panel.background");
     public static Color foregroundColor = UIManager.getColor(Color.BLACK);
+    private static Settings settings;
     
     private final CrewListModel coModel, xoModel, officerModel, chiefModel, engineeringModel, operationsModel, deckModel, supportModel;
     
@@ -51,6 +52,7 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
      */
     public StatusBoardFrame() {
         DB = RosterDataBaseHelper.getInstance();
+        settings = Settings.getInstance();
         coModel = new CrewListModel(CON.COMMANDING_OFFICER);
         xoModel = new CrewListModel(CON.EXECUTIVE_OFFICER);
         officerModel = new CrewListModel(CON.OFFICERS);
@@ -71,6 +73,7 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
             this.setTitle(cutterName);
         }
         setNumberAfloatLabel(DB.getNumberAfloat());
+        nightModeToggle.setSelected(settings.getNightMode());
         
     final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
     executorService.scheduleAtFixedRate(() -> {
@@ -435,18 +438,9 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
     }//GEN-LAST:event_managerUsersButtonActionPerformed
 
     private void nightModeToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nightModeToggleActionPerformed
-        // TODO add your handling code here:
-        
-        if (nightModeToggle.isSelected()) {
-            backgroundColor = Color.BLACK;
-            foregroundColor = Color.WHITE;
-        } else {
-            backgroundColor = UIManager.getColor("Panel.background");
-            foregroundColor = Color.BLACK;
-        }
-
+        // TODO add your handling code here:        
+        settings.setNightMode(nightModeToggle.isSelected());
         setupColors();
-
     }//GEN-LAST:event_nightModeToggleActionPerformed
 
     private void logsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logsButtonActionPerformed
@@ -521,6 +515,14 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
      }
  
  private void setupColors() {
+     if (settings.getNightMode()) {
+            backgroundColor = Color.BLACK;
+            foregroundColor = Color.WHITE;
+     } else {
+            backgroundColor = UIManager.getColor("Panel.background");
+            foregroundColor = Color.BLACK;
+     }
+     
         this.getContentPane().setBackground(backgroundColor);
         jPanel1.setBackground(backgroundColor);
      

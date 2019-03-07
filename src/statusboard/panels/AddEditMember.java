@@ -5,6 +5,8 @@ import javax.swing.JDialog;
 import statusboard.Constants;
 import statusboard.CrewMemberObject;
 import statusboard.StatusBoard;
+import static statusboard.StatusBoardFrame.backgroundColor;
+import static statusboard.StatusBoardFrame.foregroundColor;
 import statusboard.databaseHelpers.RosterDataBaseHelper;
 
 public class AddEditMember extends javax.swing.JPanel {
@@ -30,6 +32,7 @@ public class AddEditMember extends javax.swing.JPanel {
         payGradeComboBox.setSelectedItem(cmo.getPayGrade());
         rankComboBox.setSelectedItem(cmo.getRank());
         barcodeText.setText(cmo.getBarcode());
+        setupColors();
     }
     
     public void setBarcodeText(String barcode) {
@@ -288,4 +291,42 @@ public class AddEditMember extends javax.swing.JPanel {
     private javax.swing.JLabel rankLabel;
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
+
+        private void setupColors() {
+        this.setBackground(backgroundColor);
+        jdg.setBackground(backgroundColor);
+        jdg.setForeground(foregroundColor);
+        barcodeLabel.setBackground(backgroundColor);
+        barcodeLabel.setForeground(foregroundColor);
+        barcodeText.setBackground(backgroundColor);
+        barcodeText.setForeground(foregroundColor);
+        jPanel1.setBackground(backgroundColor);
+        jPanel1.setForeground(foregroundColor);
+        cancelButton.setBackground(backgroundColor);
+        cancelButton.setForeground(foregroundColor);
+        saveButton.setBackground(backgroundColor);
+        saveButton.setForeground(foregroundColor);
+        deptComboBox.setBackground(backgroundColor);
+        deptComboBox.setForeground(foregroundColor);
+        deptLabel.setBackground(backgroundColor);
+        deptLabel.setForeground(foregroundColor);
+        fNameLabel.setBackground(backgroundColor);
+        fNameLabel.setForeground(foregroundColor);
+        fNameText.setBackground(backgroundColor);
+        fNameText.setForeground(foregroundColor);
+        lNameLabel.setBackground(backgroundColor);
+        lNameLabel.setForeground(foregroundColor);
+        lNameText.setBackground(backgroundColor);
+        lNameText.setForeground(foregroundColor);
+        payGradeComboBox.setBackground(backgroundColor);
+        payGradeComboBox.setForeground(foregroundColor);
+        payGradeLabel.setBackground(backgroundColor);
+        payGradeLabel.setForeground(foregroundColor);        
+        rankComboBox.setBackground(backgroundColor);
+        rankComboBox.setForeground(foregroundColor);        
+        rankLabel.setBackground(backgroundColor);
+        rankLabel.setForeground(foregroundColor);          
+    }
+
+
 }

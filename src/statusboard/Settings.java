@@ -93,6 +93,15 @@ public class Settings {
             return val;
         }
     }
+    
+    private int getInt(String field, int defaultValue) {
+        String val = props.getProperty(field);
+        if (val == null || val.isEmpty()) {
+            return defaultValue;
+        } else {
+            return Integer.valueOf(val);
+        }
+    }
 
     public void setNightMode(boolean status) {
         storeBoolean("NightMode", status);

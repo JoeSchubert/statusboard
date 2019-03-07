@@ -26,3 +26,5 @@ hs_err_pid*
 build/*
 nbproject/*
 *.db-journal
+
+config\.properties

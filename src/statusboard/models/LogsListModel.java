@@ -10,12 +10,11 @@ public class LogsListModel extends AbstractTableModel {
 
     private final LoggingDataBaseHelper db;
     private List<LogObject> rows = new ArrayList<>();
-    private String[] headers;
+    private static final String[] HEADERS = new String[]{"Time", "Event", "Detail"};
 
     public LogsListModel() {
         db = LoggingDataBaseHelper.getInstance();
         rows = db.getAllEntries();
-        headers = new String[]{"Time", "Event", "Detail"};
     }
 
     public void add(LogObject log) {
@@ -63,7 +62,7 @@ public class LogsListModel extends AbstractTableModel {
 
     @Override
     public String getColumnName(int col) {
-        return headers[col];
+        return HEADERS[col];
     }
 
 }

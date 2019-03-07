@@ -4,8 +4,6 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
 import javax.swing.JTable;
-import javax.swing.table.DefaultTableColumnModel;
-import javax.swing.table.TableColumn;
 import statusboard.StatusBoard;
 import static statusboard.StatusBoardFrame.backgroundColor;
 import static statusboard.StatusBoardFrame.foregroundColor;
@@ -13,21 +11,12 @@ import statusboard.TableColumnAdjuster;
 import statusboard.databaseHelpers.RosterDataBaseHelper;
 import statusboard.models.UserListModel;
 
-/**
- *
- * @author joe
- */
 public class UserList extends javax.swing.JPanel {
         private final JDialog jdg;
         private final UserListModel userListModel;
         private final JDialog aemDialog = new JDialog();
         private final RosterDataBaseHelper db = RosterDataBaseHelper.getInstance();
 
-
-    /**
-     * Creates new form UserList
-     * @param jdiag
-     */
     public UserList(JDialog jdiag) {
         jdg = jdiag;
         userListModel = new statusboard.models.UserListModel();
@@ -142,7 +131,6 @@ public class UserList extends javax.swing.JPanel {
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        // TODO add your handling code here:
          db.deleteRow(userListModel.getMemberAtPos(userListTable.getSelectedRow()));
          StatusBoard.sbf.refreshDeptTable(userListModel.getMemberAtPos(userListTable.getSelectedRow()).getDepartment());
          userListModel.refreshUserListModel();

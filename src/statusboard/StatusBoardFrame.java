@@ -433,18 +433,15 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
     }// </editor-fold>//GEN-END:initComponents
 
     private void managerUsersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managerUsersButtonActionPerformed
-        // TODO add your handling code here:
         displayUserList();
     }//GEN-LAST:event_managerUsersButtonActionPerformed
 
     private void nightModeToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nightModeToggleActionPerformed
-        // TODO add your handling code here:        
         settings.setNightMode(nightModeToggle.isSelected());
         setupColors();
     }//GEN-LAST:event_nightModeToggleActionPerformed
 
     private void logsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logsButtonActionPerformed
-        // TODO add your handling code here:
         displayLogList();
     }//GEN-LAST:event_logsButtonActionPerformed
 

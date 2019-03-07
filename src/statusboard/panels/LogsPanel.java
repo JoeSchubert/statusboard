@@ -1,19 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package statusboard.panels;
 
-/**
- *
- * @author joe
- */
 public class LogsPanel extends javax.swing.JPanel {
 
-    /**
-     * Creates new form LogsPanel
-     */
     public LogsPanel() {
         initComponents();
     }

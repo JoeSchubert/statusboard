@@ -6,6 +6,8 @@ import javax.swing.JDialog;
 import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.TableColumn;
 import statusboard.StatusBoard;
+import static statusboard.StatusBoardFrame.backgroundColor;
+import static statusboard.StatusBoardFrame.foregroundColor;
 import statusboard.databaseHelpers.RosterDataBaseHelper;
 import statusboard.models.UserListModel;
 
@@ -29,7 +31,7 @@ public class UserList extends javax.swing.JPanel {
         userListModel = new statusboard.models.UserListModel();
         initComponents();
         userListTable.setAutoResizeMode(0);
-        userListTable.setOpaque(false);
+          
         DefaultTableColumnModel colModel = (DefaultTableColumnModel) userListTable.getColumnModel();
 
          TableColumn col;
@@ -47,6 +49,7 @@ public class UserList extends javax.swing.JPanel {
 
          jdg.pack();
          jdg.setLocationRelativeTo(null);
+         setupColors();
          jdg.setVisible(true);
         
     }
@@ -165,5 +168,21 @@ public class UserList extends javax.swing.JPanel {
     private javax.swing.JTable userListTable;
     // End of variables declaration//GEN-END:variables
 
-
+    private void setupColors() {
+        this.setBackground(backgroundColor);
+        jdg.setBackground(backgroundColor);
+        jdg.setForeground(foregroundColor);
+        aemDialog.setBackground(backgroundColor);
+        jPanel1.setBackground(backgroundColor);
+        jPanel1.setForeground(foregroundColor);
+        deleteButton.setBackground(backgroundColor);
+        deleteButton.setForeground(foregroundColor);
+        editButton.setBackground(backgroundColor);
+        editButton.setForeground(foregroundColor);
+        jScrollPane1.setBackground(backgroundColor);
+        jScrollPane1.setForeground(foregroundColor);
+        userListTable.setBackground(backgroundColor);
+        userListTable.setForeground(foregroundColor);
+        userListTable.setOpaque(false);
+    }
 }

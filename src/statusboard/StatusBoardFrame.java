@@ -42,6 +42,8 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
     public static Color backgroundColor = UIManager.getColor("Panel.background");
     public static Color foregroundColor = UIManager.getColor(Color.BLACK);
     private static Settings settings;
+    private static long initialKeyEventTime = 0;
+    private static int scannerTimeThreshold; // Time in milliseconds that the scanner should send it's input within
 
     private final CrewListModel coModel, xoModel, officerModel, chiefModel, engineeringModel, operationsModel, deckModel, supportModel;
 
@@ -51,6 +53,7 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
     public StatusBoardFrame() {
         DB = RosterDataBaseHelper.getInstance();
         settings = Settings.getInstance();
+        scannerTimeThreshold = settings.getScannerTimeThreshold();
         coModel = new CrewListModel(CON.COMMANDING_OFFICER);
         xoModel = new CrewListModel(CON.EXECUTIVE_OFFICER);
         officerModel = new CrewListModel(CON.OFFICERS);
@@ -567,9 +570,18 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
                         }
                     }
                     keyInput = new StringBuilder();
+                    initialKeyEventTime = 0;
                 } else if ((e.getKeyCode() >= 48 && e.getKeyCode() <= 57) || (e.getKeyCode() >= 65 && e.getKeyCode() <= 90) || (e.getKeyCode() >= 97 && e.getKeyCode() <= 122)) {
                     //only store alphanumeric values, anything else is jibberish
-                    keyInput.append(e.getKeyChar());
+                    // Setup a threshold to prevent accidental keypresses from interfering with the card reader's input. 
+                    // If the time is greather than the threshold erase any existing input and start over.
+                    if ((System.currentTimeMillis() - initialKeyEventTime) > scannerTimeThreshold) {
+                        initialKeyEventTime = System.currentTimeMillis();
+                        keyInput = new StringBuilder();
+                        keyInput.append(e.getKeyChar());
+                    } else {
+                        keyInput.append(e.getKeyChar());
+                    }
                 }
                 e.consume();
                 return true;

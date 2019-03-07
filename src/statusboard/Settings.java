@@ -119,5 +119,9 @@ public class Settings {
     public String getCutterName() {
         return getString("CutterName", "Coast Guard Cutter");
     }
+    
+    public int getScannerTimeThreshold() {
+        return getInt("ScannerTimeThreshold", 1000);
+    }
 
 }

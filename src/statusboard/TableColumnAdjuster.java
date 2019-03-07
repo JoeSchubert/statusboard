@@ -29,7 +29,7 @@ public class TableColumnAdjuster implements PropertyChangeListener, TableModelLi
     private boolean isColumnDataIncluded;
     private boolean isOnlyAdjustLarger;
     private boolean isDynamicAdjustment;
-    private Map<TableColumn, Integer> columnSizes = new HashMap<TableColumn, Integer>();
+    private final Map<TableColumn, Integer> columnSizes = new HashMap<>();
 
     /*
 	 *  Specify the table and use default spacing
@@ -152,7 +152,7 @@ public class TableColumnAdjuster implements PropertyChangeListener, TableModelLi
             width = Math.max(width, tableColumn.getPreferredWidth());
         }
 
-        columnSizes.put(tableColumn, new Integer(tableColumn.getWidth()));
+        columnSizes.put(tableColumn, tableColumn.getWidth());
         if (isColumnHeaderIncluded) {
             table.getTableHeader().setResizingColumn(tableColumn);
         }
@@ -160,47 +160,23 @@ public class TableColumnAdjuster implements PropertyChangeListener, TableModelLi
     }
 
     /*
-	 *  Restore the widths of the columns in the table to its previous width
-     */
-    public void restoreColumns() {
-        TableColumnModel tcm = table.getColumnModel();
-
-        for (int i = 0; i < tcm.getColumnCount(); i++) {
-            restoreColumn(i);
-        }
-    }
-
-    /*
-	 *  Restore the width of the specified column to its previous width
-     */
-    private void restoreColumn(int column) {
-        TableColumn tableColumn = table.getColumnModel().getColumn(column);
-        Integer width = columnSizes.get(tableColumn);
-
-        if (width != null) {
-            table.getTableHeader().setResizingColumn(tableColumn);
-            tableColumn.setWidth(width.intValue());
-        }
-    }
-
-    /*
 	 *	Indicates whether to include the header in the width calculation
      */
-    public void setColumnHeaderIncluded(boolean isColumnHeaderIncluded) {
+    private void setColumnHeaderIncluded(boolean isColumnHeaderIncluded) {
         this.isColumnHeaderIncluded = isColumnHeaderIncluded;
     }
 
     /*
 	 *	Indicates whether to include the model data in the width calculation
      */
-    public void setColumnDataIncluded(boolean isColumnDataIncluded) {
+    private void setColumnDataIncluded(boolean isColumnDataIncluded) {
         this.isColumnDataIncluded = isColumnDataIncluded;
     }
 
     /*
 	 *	Indicates whether columns can only be increased in size
      */
-    public void setOnlyAdjustLarger(boolean isOnlyAdjustLarger) {
+    private void setOnlyAdjustLarger(boolean isOnlyAdjustLarger) {
         this.isOnlyAdjustLarger = isOnlyAdjustLarger;
     }
 
@@ -208,7 +184,7 @@ public class TableColumnAdjuster implements PropertyChangeListener, TableModelLi
 	 *  Indicate whether changes to the model should cause the width to be
 	 *  dynamically recalculated.
      */
-    public void setDynamicAdjustment(boolean isDynamicAdjustment) {
+    private void setDynamicAdjustment(boolean isDynamicAdjustment) {
         //  May need to add or remove the TableModelListener when changed
 
         if (this.isDynamicAdjustment != isDynamicAdjustment) {
@@ -227,6 +203,7 @@ public class TableColumnAdjuster implements PropertyChangeListener, TableModelLi
 //  Implement the PropertyChangeListener
 //
 
+    @Override
     public void propertyChange(PropertyChangeEvent e) {
         //  When the TableModel changes we need to update the listeners
         //  and column widths
@@ -244,37 +221,36 @@ public class TableColumnAdjuster implements PropertyChangeListener, TableModelLi
 //  Implement the TableModelListener
 //
 
+    @Override
     public void tableChanged(TableModelEvent e) {
         if (!isColumnDataIncluded) {
             return;
         }
 
         //  Needed when table is sorted.
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                //  A cell has been updated
+        SwingUtilities.invokeLater(() -> {
+            //  A cell has been updated
 
-                int column = table.convertColumnIndexToView(e.getColumn());
+            int column = table.convertColumnIndexToView(e.getColumn());
 
-                if (e.getType() == TableModelEvent.UPDATE && column != -1) {
-                    //  Only need to worry about an increase in width for this cell
+            if (e.getType() == TableModelEvent.UPDATE && column != -1) {
+                //  Only need to worry about an increase in width for this cell
 
-                    if (isOnlyAdjustLarger) {
-                        int row = e.getFirstRow();
-                        TableColumn tableColumn = table.getColumnModel().getColumn(column);
+                if (isOnlyAdjustLarger) {
+                    int row = e.getFirstRow();
+                    TableColumn tableColumn = table.getColumnModel().getColumn(column);
 
-                        if (tableColumn.getResizable()) {
-                            int width = getCellDataWidth(row, column);
-                            updateTableColumn(column, width);
-                        }
-                    } //	Could be an increase of decrease so check all rows
-                    else {
-                        adjustColumn(column);
+                    if (tableColumn.getResizable()) {
+                        int width = getCellDataWidth(row, column);
+                        updateTableColumn(column, width);
                     }
-                } //  The update affected more than one column so adjust all columns
+                } //	Could be an increase of decrease so check all rows
                 else {
-                    adjustColumns();
+                    adjustColumn(column);
                 }
+            } //  The update affected more than one column so adjust all columns
+            else {
+                adjustColumns();
             }
         });
     }

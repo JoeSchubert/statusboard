@@ -102,4 +102,13 @@ public class Settings {
         return getBoolean("NightMode", false);
     }
 
+    public void setCutterName(String name) {
+        props.setProperty("CutterName", name);
+        saveProps();
+    }
+
+    public String getCutterName() {
+        return getString("CutterName", "Coast Guard Cutter");
+    }
+
 }

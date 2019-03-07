@@ -6,9 +6,6 @@ import java.awt.KeyEventDispatcher;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.Executors;
@@ -68,11 +65,9 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
 
         setupTablesLAF();
         setupColors();
-        String cutterName = getCutterName();
-        if (cutterName != null) {
-            cutterLabel.setText(cutterName);
-            this.setTitle(cutterName);
-        }
+        String cutterName = settings.getCutterName();
+        cutterLabel.setText(cutterName);
+        this.setTitle(cutterName);
         setNumberAfloatLabel(DB.getNumberAfloat());
         nightModeToggle.setSelected(settings.getNightMode());
 
@@ -643,17 +638,6 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
     public void refreshDeptTable(String dept) {
         getModel(dept).refreshRows();
         getModel(dept).fireTableDataChanged();
-    }
-
-    private String getCutterName() {
-        String cutterName = null;
-        try {
-            BufferedReader br = new BufferedReader(new FileReader("cutter name.txt"));
-            cutterName = br.readLine();
-        } catch (IOException e) {
-            System.err.println(e.getClass().getName() + ": " + e.getMessage());
-        }
-        return cutterName;
     }
 
     private CrewListModel getModel(String dept) {

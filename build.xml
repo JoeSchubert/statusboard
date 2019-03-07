@@ -72,7 +72,7 @@
     -->
     
     <target name="-post-jar">
-            <copy overwrite="true" tofile="${dist.dir}/README.TXT" file="README" /> 
+            <copy overwrite="true" tofile="${dist.dir}/README.TXT" file="README.txt" /> 
             <copy overwrite="true" tofile="${dist.dir}/Launch_StatusBoard.bat" file="Launch_StatusBoard.bat" /> 
             <copy overwrite="true" tofile="${dist.dir}/Launch_StatusBoard.sh" file="Launch_StatusBoard.sh" /> 
     </target>

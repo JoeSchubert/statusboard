@@ -28,3 +28,5 @@ nbproject/*
 *.db-journal
 
 config\.properties
+
+dist/

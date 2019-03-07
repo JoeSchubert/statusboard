@@ -287,14 +287,14 @@ public class RosterDataBaseHelper {
         if (c == null) {
             openDatabase();
         }
-        String num = "Number Afloat: 0";
+        String num = "On-board: 0";
         try {
             Statement stmt = c.createStatement();
             ResultSet result;
             String sql = "SELECT COUNT(*) as count_name from " + TABLE_NAME + " where " + STATUS + " = true;";
             result = stmt.executeQuery(sql);
             while (result.next()) {
-                num = "Members Afloat: " + String.format("%02d", result.getInt("count_name"));
+                num = "On-board: " + String.format("%02d", result.getInt("count_name"));
             }
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());

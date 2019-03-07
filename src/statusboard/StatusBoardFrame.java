@@ -291,7 +291,7 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
             }
         });
 
-        numberAfloat.setText("Members Afloat: XX");
+        numberAfloat.setText("On-board: XX");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -350,7 +350,7 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
                                     .addComponent(logsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cutterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE)
+                        .addComponent(cutterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 812, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(nightModeToggle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)

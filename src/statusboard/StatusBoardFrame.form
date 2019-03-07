@@ -113,7 +113,7 @@
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="cutterLabel" pref="792" max="32767" attributes="0"/>
+                          <Component id="cutterLabel" pref="812" max="32767" attributes="0"/>
                           <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="nightModeToggle" max="32767" attributes="0"/>
@@ -562,7 +562,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="numberAfloat">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Members Afloat: XX"/>
+            <Property name="text" type="java.lang.String" value="On-board: XX"/>
           </Properties>
         </Component>
       </SubComponents>

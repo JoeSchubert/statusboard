@@ -85,6 +85,15 @@ public class Settings {
         return returnVal;
     }
 
+    private String getString(String field, String defaultValue) {
+        String val = props.getProperty(field);
+        if (val == null || val.isEmpty()) {
+            return defaultValue;
+        } else {
+            return val;
+        }
+    }
+
     public void setNightMode(boolean status) {
         storeBoolean("NightMode", status);
     }

@@ -131,7 +131,7 @@ public class LoggingDataBaseHelper {
         return log;
     }
 
-    public void pruneLogs() {
+    public final void pruneLogs() {
         if (c == null) {
             openDatabase();
         }

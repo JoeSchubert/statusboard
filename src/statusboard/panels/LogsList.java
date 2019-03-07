@@ -17,7 +17,7 @@ public class LogsList extends javax.swing.JPanel {
 
     private final JDialog jdg;
     private final LogsListModel logsListModel;
-    private TableRowSorter<LogsListModel> sorter;
+    private final TableRowSorter<LogsListModel> sorter;
 
     /**
      * Creates new form UserList
@@ -30,7 +30,7 @@ public class LogsList extends javax.swing.JPanel {
         initComponents();
         logsListTable.setAutoResizeMode(0);
         logsListTable.setOpaque(false);
-        sorter = new TableRowSorter<LogsListModel>(logsListModel);
+        sorter = new TableRowSorter<>(logsListModel);
         logsListTable.setRowSorter(sorter);
 
         jdg.pack();
@@ -152,7 +152,7 @@ public class LogsList extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void filterLogs() {
-        RowFilter<LogsListModel, Object> rf = null;
+        RowFilter<LogsListModel, Object> rf;
         try {
             rf = RowFilter.regexFilter("(?i)" + filterText.getText());
         } catch (java.util.regex.PatternSyntaxException e) {

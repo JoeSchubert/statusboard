@@ -604,6 +604,9 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
  }
  
  private void displayUserList() {
+     if (jdg.isVisible()) {
+         jdg.getContentPane().removeAll();
+     }
      userList = new UserList(jdg);
     jdg.setAutoRequestFocus(true);
     jdg.setSize(280, 500);
@@ -621,9 +624,11 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
  }
  
   private void displayLogList() {
+    if (jdg.isVisible()) {
+         jdg.getContentPane().removeAll();
+     }
      logsList = new LogsList(jdg);
     jdg.setAutoRequestFocus(true);
-    jdg.setSize(800, 550);
     jdg.setResizable(true);
     jdg.add(logsList);
         jdg.addWindowListener(new WindowAdapter() {

@@ -14,12 +14,14 @@ import statusboard.models.LogsListModel;
  * @author joe
  */
 public class LogsList extends javax.swing.JPanel {
-        private final JDialog jdg;
-        private final LogsListModel logsListModel;
-        private TableRowSorter<LogsListModel> sorter;
+
+    private final JDialog jdg;
+    private final LogsListModel logsListModel;
+    private TableRowSorter<LogsListModel> sorter;
 
     /**
      * Creates new form UserList
+     *
      * @param jdiag
      */
     public LogsList(JDialog jdiag) {
@@ -31,14 +33,14 @@ public class LogsList extends javax.swing.JPanel {
         sorter = new TableRowSorter<LogsListModel>(logsListModel);
         logsListTable.setRowSorter(sorter);
 
-         jdg.pack();
-         setupColors();
-         logsListTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-         TableColumnAdjuster tca = new TableColumnAdjuster(logsListTable, true);
-         tca.adjustColumns();
-         jdg.setLocationRelativeTo(null);
-         jdg.setVisible(true);
-        
+        jdg.pack();
+        setupColors();
+        logsListTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TableColumnAdjuster tca = new TableColumnAdjuster(logsListTable, true);
+        tca.adjustColumns();
+        jdg.setLocationRelativeTo(null);
+        jdg.setVisible(true);
+
     }
 
     /**
@@ -158,13 +160,13 @@ public class LogsList extends javax.swing.JPanel {
         }
         sorter.setRowFilter(rf);
     }
-    
+
     private void clearFilter() {
         sorter.setRowFilter(null);
         filterText.setText("");
     }
 
-        private void setupColors() {
+    private void setupColors() {
         this.setBackground(backgroundColor);
         jdg.setBackground(backgroundColor);
         jdg.setForeground(foregroundColor);
@@ -185,7 +187,7 @@ public class LogsList extends javax.swing.JPanel {
         filterText.setForeground(foregroundColor);
         logsListTable.setOpaque(false);
         logsListTable.getTableHeader().setBackground(backgroundColor);
-         logsListTable.getTableHeader().setForeground(foregroundColor);
+        logsListTable.getTableHeader().setForeground(foregroundColor);
     }
-        
+
 }

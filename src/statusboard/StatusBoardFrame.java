@@ -34,6 +34,7 @@ import statusboard.panels.UserList;
 import statusboard.panels.LogsList;
 
 public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDispatcher {
+
     private static RosterDataBaseHelper DB;
     private final static Constants CON = new Constants();
     private static StringBuilder keyInput = new StringBuilder();
@@ -44,9 +45,9 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
     public static Color backgroundColor = UIManager.getColor("Panel.background");
     public static Color foregroundColor = UIManager.getColor(Color.BLACK);
     private static Settings settings;
-    
+
     private final CrewListModel coModel, xoModel, officerModel, chiefModel, engineeringModel, operationsModel, deckModel, supportModel;
-    
+
     /**
      * Creates new form StatusBoardFrame
      */
@@ -61,8 +62,8 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         operationsModel = new CrewListModel(CON.OPERATIONS);
         deckModel = new CrewListModel(CON.DECK);
         supportModel = new CrewListModel(CON.SUPPORT);
-  
-        initComponents();        
+
+        initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         setupTablesLAF();
@@ -74,12 +75,12 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         }
         setNumberAfloatLabel(DB.getNumberAfloat());
         nightModeToggle.setSelected(settings.getNightMode());
-        
-    final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
-    executorService.scheduleAtFixedRate(() -> {
-        Date date = new Date();
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        timeLabel.setText(sdf.format(date));
+
+        final ScheduledExecutorService executorService = Executors.newSingleThreadScheduledExecutor();
+        executorService.scheduleAtFixedRate(() -> {
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+            timeLabel.setText(sdf.format(date));
         }, 0, 1, TimeUnit.SECONDS);
     }
 
@@ -483,107 +484,106 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
     private javax.swing.JTable xoTable;
     // End of variables declaration//GEN-END:variables
 
+    private void setupTablesLAF() {
+        for (int i = 0; i < 8; i++) {
+            JTable temp = getTable(i);
+            temp.setAutoResizeMode(0);
+            temp.setOpaque(false);
+            temp.setShowGrid(false);
+            temp.setDefaultRenderer(Boolean.class, new BooleanRenderer());
+            temp.setDefaultRenderer(String.class, new StringRenderer());
+            ((DefaultTableCellRenderer) temp.getDefaultRenderer(Object.class)).setOpaque(false);
 
- private void setupTablesLAF() {
-     for (int i = 0; i < 8; i++) {
-         JTable temp = getTable(i);
-         temp.setAutoResizeMode(0);
-        temp.setOpaque(false);
-         temp.setShowGrid(false);
-         temp.setDefaultRenderer(Boolean.class, new BooleanRenderer());
-         temp.setDefaultRenderer(String.class, new StringRenderer());
-         ((DefaultTableCellRenderer) temp.getDefaultRenderer(Object.class)).setOpaque(false);
-          
-         DefaultTableColumnModel colModel = (DefaultTableColumnModel) temp.getColumnModel();
-         TableColumn col;
-         col = colModel.getColumn(0);
-         col.setPreferredWidth(0);
-         col.setWidth(0);
+            DefaultTableColumnModel colModel = (DefaultTableColumnModel) temp.getColumnModel();
+            TableColumn col;
+            col = colModel.getColumn(0);
+            col.setPreferredWidth(0);
+            col.setWidth(0);
 
-         col = colModel.getColumn(1);
-         col.setPreferredWidth(40);
-         col.setWidth(40);
-         
-         col = colModel.getColumn(2);
-         col.setPreferredWidth(120);
-         col.setWidth(120);
-         col.sizeWidthToFit();
-         }
-     }
- 
- private void setupColors() {
-     if (settings.getNightMode()) {
+            col = colModel.getColumn(1);
+            col.setPreferredWidth(40);
+            col.setWidth(40);
+
+            col = colModel.getColumn(2);
+            col.setPreferredWidth(120);
+            col.setWidth(120);
+            col.sizeWidthToFit();
+        }
+    }
+
+    private void setupColors() {
+        if (settings.getNightMode()) {
             backgroundColor = Color.BLACK;
             foregroundColor = Color.WHITE;
-     } else {
+        } else {
             backgroundColor = UIManager.getColor("Panel.background");
             foregroundColor = Color.BLACK;
-     }
-     
+        }
+
         this.getContentPane().setBackground(backgroundColor);
         jPanel1.setBackground(backgroundColor);
-     
-     for (Component comp : jPanel1.getComponents()) {
-           if (comp instanceof JScrollPane) {
-               ((JScrollPane) comp).getViewport().setBackground(backgroundColor);
-           } else if (comp instanceof JLabel) {
-               ((JLabel) comp).setForeground(foregroundColor);
-           } else if (comp instanceof JButton) {
-               ((JButton) comp).setBackground(backgroundColor);
-               ((JButton) comp).setForeground(foregroundColor);
-           } else if (comp instanceof JToggleButton) {
-               ((JToggleButton) comp).setBackground(backgroundColor);
-               ((JToggleButton) comp).setForeground(foregroundColor);
-           }
-       } 
- }
- 
- @Override
- public boolean dispatchKeyEvent(KeyEvent e) {
-     // Don't capture teh keys if the add/edit user dialog is displayed
-     if (jdg.isVisible()) {
-         return false;
-     }
-    switch (e.getID()) {
-        case KeyEvent.KEY_PRESSED:
-            if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                if (keyInput.toString().matches("[A-Za-z0-9]+") && keyInput.length() == 18) {
-                    // Alphanumeric string that is 18 characters long, assume it's a barcode and process it
-                    CrewMemberObject cm = DB.getMemberByBarcode(keyInput.toString());
-                    if (cm.getId() != 0 ) {
-                        // a non-zero value indicates that the CrewMemberObject had the id and status filled by the db call.
-                        DB.toggleCrewMemberStatusByScanner(cm, cm.isStatus());
-                        refreshDeptTable(cm.getDepartment());
-                        lastScanNameLabel.setText(cm.getRank() + " " + cm.getLastName());
-                        Date date = new Date();
-                        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-                        lastScanTimeLabel.setText(" @ " + sdf.format(date));
-                        // Reverse logic on the cm.isStatus() as it is being toggled above
-                        if (cm.isStatus()) {
-                            lastScanColorBox.setBackground(Color.RED);
-                            lastScanColorBox.setOpaque(true);
-                        } else {
-                            lastScanColorBox.setBackground(Color.GREEN);
-                            lastScanColorBox.setOpaque(true);
-                        }
-                    } else {
-                        displayAddEditUser();
-                        aem.setBarcodeText(keyInput.toString());
-                    }
-                }
-                keyInput = new StringBuilder();
-            } else if ((e.getKeyCode() >= 48 && e.getKeyCode() <= 57) || (e.getKeyCode() >= 65 && e.getKeyCode() <= 90) || (e.getKeyCode() >= 97 && e.getKeyCode() <= 122)) {
-                //only store alphanumeric values, anything else is jibberish
-                keyInput.append(e.getKeyChar());      
+
+        for (Component comp : jPanel1.getComponents()) {
+            if (comp instanceof JScrollPane) {
+                ((JScrollPane) comp).getViewport().setBackground(backgroundColor);
+            } else if (comp instanceof JLabel) {
+                ((JLabel) comp).setForeground(foregroundColor);
+            } else if (comp instanceof JButton) {
+                ((JButton) comp).setBackground(backgroundColor);
+                ((JButton) comp).setForeground(foregroundColor);
+            } else if (comp instanceof JToggleButton) {
+                ((JToggleButton) comp).setBackground(backgroundColor);
+                ((JToggleButton) comp).setForeground(foregroundColor);
             }
-            e.consume();
-            return true;
-        default:
-            return false;
+        }
     }
- }
- 
- private void displayAddEditUser() {
+
+    @Override
+    public boolean dispatchKeyEvent(KeyEvent e) {
+        // Don't capture teh keys if the add/edit user dialog is displayed
+        if (jdg.isVisible()) {
+            return false;
+        }
+        switch (e.getID()) {
+            case KeyEvent.KEY_PRESSED:
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+                    if (keyInput.toString().matches("[A-Za-z0-9]+") && keyInput.length() == 18) {
+                        // Alphanumeric string that is 18 characters long, assume it's a barcode and process it
+                        CrewMemberObject cm = DB.getMemberByBarcode(keyInput.toString());
+                        if (cm.getId() != 0) {
+                            // a non-zero value indicates that the CrewMemberObject had the id and status filled by the db call.
+                            DB.toggleCrewMemberStatusByScanner(cm, cm.isStatus());
+                            refreshDeptTable(cm.getDepartment());
+                            lastScanNameLabel.setText(cm.getRank() + " " + cm.getLastName());
+                            Date date = new Date();
+                            SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+                            lastScanTimeLabel.setText(" @ " + sdf.format(date));
+                            // Reverse logic on the cm.isStatus() as it is being toggled above
+                            if (cm.isStatus()) {
+                                lastScanColorBox.setBackground(Color.RED);
+                                lastScanColorBox.setOpaque(true);
+                            } else {
+                                lastScanColorBox.setBackground(Color.GREEN);
+                                lastScanColorBox.setOpaque(true);
+                            }
+                        } else {
+                            displayAddEditUser();
+                            aem.setBarcodeText(keyInput.toString());
+                        }
+                    }
+                    keyInput = new StringBuilder();
+                } else if ((e.getKeyCode() >= 48 && e.getKeyCode() <= 57) || (e.getKeyCode() >= 65 && e.getKeyCode() <= 90) || (e.getKeyCode() >= 97 && e.getKeyCode() <= 122)) {
+                    //only store alphanumeric values, anything else is jibberish
+                    keyInput.append(e.getKeyChar());
+                }
+                e.consume();
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private void displayAddEditUser() {
         aem = new AddEditMember(jdg);
         jdg.setAutoRequestFocus(true);
         jdg.setSize(300, 400);
@@ -598,17 +598,17 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
                 jdg.dispose();
             }
         });
- }
- 
- private void displayUserList() {
-     if (jdg.isVisible()) {
-         jdg.getContentPane().removeAll();
-     }
-     userList = new UserList(jdg);
-    jdg.setAutoRequestFocus(true);
-    jdg.setSize(280, 500);
-    jdg.setResizable(false);
-    jdg.add(userList);
+    }
+
+    private void displayUserList() {
+        if (jdg.isVisible()) {
+            jdg.getContentPane().removeAll();
+        }
+        userList = new UserList(jdg);
+        jdg.setAutoRequestFocus(true);
+        jdg.setSize(280, 500);
+        jdg.setResizable(false);
+        jdg.add(userList);
         jdg.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -616,18 +616,18 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
                 jdg.dispose();
             }
         });
-    jdg.setLocationRelativeTo(null);
-    jdg.setVisible(true);
- }
- 
-  private void displayLogList() {
-    if (jdg.isVisible()) {
-         jdg.getContentPane().removeAll();
-     }
-     logsList = new LogsList(jdg);
-    jdg.setAutoRequestFocus(true);
-    jdg.setResizable(true);
-    jdg.add(logsList);
+        jdg.setLocationRelativeTo(null);
+        jdg.setVisible(true);
+    }
+
+    private void displayLogList() {
+        if (jdg.isVisible()) {
+            jdg.getContentPane().removeAll();
+        }
+        logsList = new LogsList(jdg);
+        jdg.setAutoRequestFocus(true);
+        jdg.setResizable(true);
+        jdg.add(logsList);
         jdg.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -636,48 +636,48 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
             }
         });
         jdg.pack();
-    jdg.setLocationRelativeTo(null);
-    jdg.setVisible(true);
- }
+        jdg.setLocationRelativeTo(null);
+        jdg.setVisible(true);
+    }
 
- public void refreshDeptTable(String dept) {
-     getModel(dept).refreshRows();
-     getModel(dept).fireTableDataChanged();
- }
- 
-private String getCutterName() {
-   String cutterName = null;
+    public void refreshDeptTable(String dept) {
+        getModel(dept).refreshRows();
+        getModel(dept).fireTableDataChanged();
+    }
+
+    private String getCutterName() {
+        String cutterName = null;
         try {
             BufferedReader br = new BufferedReader(new FileReader("cutter name.txt"));
             cutterName = br.readLine();
         } catch (IOException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
-   return cutterName;
-}
-
-private CrewListModel getModel(String dept) { 
-    if (dept.equals(CON.getDepartmentByPos(0))) {
-        return coModel;
-    } else if (dept.equals(CON.getDepartmentByPos(1))) {
-        return xoModel;
-    } else if (dept.equals(CON.getDepartmentByPos(2))) {
-        return officerModel;
-    } else if (dept.equals(CON.getDepartmentByPos(3))) {
-        return chiefModel;
-    } else if (dept.equals(CON.getDepartmentByPos(4))) {
-        return engineeringModel;
-    } else if (dept.equals(CON.getDepartmentByPos(5))) {
-        return operationsModel;
-    } else if (dept.equals(CON.getDepartmentByPos(6))) {
-        return deckModel;
-    } else if (dept.equals(CON.getDepartmentByPos(7))) {
-        return supportModel;
+        return cutterName;
     }
-    return null;
-}
 
-private JTable getTable(int pos) { 
+    private CrewListModel getModel(String dept) {
+        if (dept.equals(CON.getDepartmentByPos(0))) {
+            return coModel;
+        } else if (dept.equals(CON.getDepartmentByPos(1))) {
+            return xoModel;
+        } else if (dept.equals(CON.getDepartmentByPos(2))) {
+            return officerModel;
+        } else if (dept.equals(CON.getDepartmentByPos(3))) {
+            return chiefModel;
+        } else if (dept.equals(CON.getDepartmentByPos(4))) {
+            return engineeringModel;
+        } else if (dept.equals(CON.getDepartmentByPos(5))) {
+            return operationsModel;
+        } else if (dept.equals(CON.getDepartmentByPos(6))) {
+            return deckModel;
+        } else if (dept.equals(CON.getDepartmentByPos(7))) {
+            return supportModel;
+        }
+        return null;
+    }
+
+    private JTable getTable(int pos) {
         switch (pos) {
             case 0:
                 return coTable;
@@ -698,17 +698,17 @@ private JTable getTable(int pos) {
             default:
                 return null;
         }
-}
+    }
 
-public void setNumberAfloatLabel(String text) {
-    numberAfloat.setText(text);
-}
- 
- public static class BooleanRenderer extends JLabel implements TableCellRenderer,  UIResource {
-        
-     public BooleanRenderer() {
-         setOpaque(true);
-     }
+    public void setNumberAfloatLabel(String text) {
+        numberAfloat.setText(text);
+    }
+
+    public static class BooleanRenderer extends JLabel implements TableCellRenderer, UIResource {
+
+        public BooleanRenderer() {
+            setOpaque(true);
+        }
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -726,13 +726,13 @@ public void setNumberAfloatLabel(String text) {
             this.setToolTipText(c.getLastScan(row));
             return this;
         }
- }
- 
-  public static class StringRenderer extends DefaultTableCellRenderer {
-        
-     public StringRenderer() {
-         setOpaque(false);
-     }
+    }
+
+    public static class StringRenderer extends DefaultTableCellRenderer {
+
+        public StringRenderer() {
+            setOpaque(false);
+        }
 
         @Override
         public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -740,6 +740,6 @@ public void setNumberAfloatLabel(String text) {
             c.setForeground(foregroundColor);
             return c;
         }
- }
- 
+    }
+
 }

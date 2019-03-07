@@ -1,6 +1,7 @@
 package statusboard;
 
 public class LogObject {
+
     private String datetime;
     private String event;
     private String detail;
@@ -31,5 +32,5 @@ public class LogObject {
         this.detail = detail;
         return this;
     }
-    
+
 }

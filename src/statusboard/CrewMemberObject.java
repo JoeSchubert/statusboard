@@ -1,6 +1,7 @@
 package statusboard;
 
 public class CrewMemberObject {
+
     private int id = 0;
     private String rank;
     private String payGrade;
@@ -19,10 +20,10 @@ public class CrewMemberObject {
         return this.rank;
     }
 
-    public String getPayGrade()  {
+    public String getPayGrade() {
         return this.payGrade;
     }
-    
+
     public String getFirstName() {
         return this.firstName;
     }
@@ -42,7 +43,7 @@ public class CrewMemberObject {
     public boolean isStatus() {
         return this.status;
     }
-    
+
     public String getLastScan() {
         return lastScan;
     }
@@ -61,6 +62,7 @@ public class CrewMemberObject {
         this.payGrade = paygrade;
         return this;
     }
+
     public CrewMemberObject setFirstName(String firstName) {
         this.firstName = firstName;
         return this;
@@ -85,13 +87,13 @@ public class CrewMemberObject {
         this.status = status;
         return this;
     }
-     
+
     public void setLastScan(String lastscan) {
-        if (lastscan == null  || lastscan.isEmpty()) {
+        if (lastscan == null || lastscan.isEmpty()) {
             this.lastScan = "unkown";
         } else {
             this.lastScan = lastscan;
         }
     }
-       
+
 }

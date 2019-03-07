@@ -19,7 +19,7 @@ public class DataBaseHelper {
             c = openDatabase();
         }
     }
-    
+
     public Connection getDatabaseConnection() {
         return c;
     }
@@ -71,7 +71,7 @@ public class DataBaseHelper {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
     }
-    
+
     public void vacuumDatabase() {
         if (c == null) {
             openDatabase();

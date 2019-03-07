@@ -3,6 +3,7 @@ package statusboard;
 import java.awt.KeyboardFocusManager;
 
 public class StatusBoard {
+
     public static StatusBoardFrame sbf;
 
     /**
@@ -20,5 +21,5 @@ public class StatusBoard {
         });
 
     }
-    
+
 }

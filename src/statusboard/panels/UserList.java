@@ -12,10 +12,11 @@ import statusboard.databaseHelpers.RosterDataBaseHelper;
 import statusboard.models.UserListModel;
 
 public class UserList extends javax.swing.JPanel {
-        private final JDialog jdg;
-        private final UserListModel userListModel;
-        private final JDialog aemDialog = new JDialog();
-        private final RosterDataBaseHelper db = RosterDataBaseHelper.getInstance();
+
+    private final JDialog jdg;
+    private final UserListModel userListModel;
+    private final JDialog aemDialog = new JDialog();
+    private final RosterDataBaseHelper db = RosterDataBaseHelper.getInstance();
 
     public UserList(JDialog jdiag) {
         jdg = jdiag;
@@ -23,13 +24,13 @@ public class UserList extends javax.swing.JPanel {
         initComponents();
         userListTable.setAutoResizeMode(0);
         userListTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-         TableColumnAdjuster tca = new TableColumnAdjuster(userListTable, false);
-         tca.adjustColumns();
-         jdg.pack();
-         jdg.setLocationRelativeTo(null);
-         setupColors();
-         jdg.setVisible(true);
-        
+        TableColumnAdjuster tca = new TableColumnAdjuster(userListTable, false);
+        tca.adjustColumns();
+        jdg.pack();
+        jdg.setLocationRelativeTo(null);
+        setupColors();
+        jdg.setVisible(true);
+
     }
 
     /**
@@ -131,9 +132,9 @@ public class UserList extends javax.swing.JPanel {
     }//GEN-LAST:event_editButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-         db.deleteRow(userListModel.getMemberAtPos(userListTable.getSelectedRow()));
-         StatusBoard.sbf.refreshDeptTable(userListModel.getMemberAtPos(userListTable.getSelectedRow()).getDepartment());
-         userListModel.refreshUserListModel();
+        db.deleteRow(userListModel.getMemberAtPos(userListTable.getSelectedRow()));
+        StatusBoard.sbf.refreshDeptTable(userListModel.getMemberAtPos(userListTable.getSelectedRow()).getDepartment());
+        userListModel.refreshUserListModel();
     }//GEN-LAST:event_deleteButtonActionPerformed
 
 

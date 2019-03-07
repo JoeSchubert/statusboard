@@ -10,8 +10,9 @@ import static statusboard.StatusBoardFrame.foregroundColor;
 import statusboard.databaseHelpers.RosterDataBaseHelper;
 
 public class AddEditMember extends javax.swing.JPanel {
-    private static  Constants con = new Constants();
-    private static  RosterDataBaseHelper db = RosterDataBaseHelper.getInstance();
+
+    private static Constants con = new Constants();
+    private static RosterDataBaseHelper db = RosterDataBaseHelper.getInstance();
     private final JDialog jdg;
     private CrewMemberObject crewMember = null;
 
@@ -25,7 +26,7 @@ public class AddEditMember extends javax.swing.JPanel {
         jdg = jdiag;
         crewMember = cmo;
         initComponents();
-        
+
         fNameText.setText(cmo.getFirstName());
         lNameText.setText(cmo.getLastName());
         deptComboBox.setSelectedItem(cmo.getDepartment());
@@ -34,11 +35,11 @@ public class AddEditMember extends javax.swing.JPanel {
         barcodeText.setText(cmo.getBarcode());
         setupColors();
     }
-    
+
     public void setBarcodeText(String barcode) {
         barcodeText.setText(barcode);
     }
-       
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -203,39 +204,39 @@ public class AddEditMember extends javax.swing.JPanel {
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-       jdg.dispose();
+        jdg.dispose();
     }//GEN-LAST:event_cancelButtonActionPerformed
 
     private void saveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveButtonActionPerformed
         // TODO add your handling code here:
-       // Don't save if Values are empty, colorize the labels red to indicate failure.
-       boolean failure = false;
+        // Don't save if Values are empty, colorize the labels red to indicate failure.
+        boolean failure = false;
         if (fNameText.getText().equals("")) {
             fNameLabel.setForeground(Color.RED);
             failure = true;
         } else {
             fNameLabel.setForeground(Color.BLACK);
-        } 
-        if ( lNameText.getText().equals("")) {
+        }
+        if (lNameText.getText().equals("")) {
             lNameLabel.setForeground(Color.RED);
             failure = true;
         } else {
             lNameLabel.setForeground(Color.BLACK);
         }
-        if (payGradeComboBox.getSelectedItem().toString().equals("") || payGradeComboBox.getSelectedItem() == null ) {
+        if (payGradeComboBox.getSelectedItem().toString().equals("") || payGradeComboBox.getSelectedItem() == null) {
             payGradeLabel.setForeground(Color.RED);
             failure = true;
         } else {
             payGradeLabel.setForeground(Color.BLACK);
         }
         // add an extra check to this if/else block because the model may not have been set yet if the previous block fails.
-        if (rankComboBox.getModel() == null || rankComboBox.getSelectedItem() == null || rankComboBox.getSelectedItem().toString().equals("") ) {
+        if (rankComboBox.getModel() == null || rankComboBox.getSelectedItem() == null || rankComboBox.getSelectedItem().toString().equals("")) {
             rankLabel.setForeground(Color.RED);
             failure = true;
         } else {
             rankLabel.setForeground(Color.BLACK);
         }
-        if (deptComboBox.getSelectedItem().toString().equals("") || deptComboBox.getSelectedItem() == null ) {
+        if (deptComboBox.getSelectedItem().toString().equals("") || deptComboBox.getSelectedItem() == null) {
             deptLabel.setForeground(Color.RED);
             failure = true;
         } else {
@@ -246,14 +247,16 @@ public class AddEditMember extends javax.swing.JPanel {
             failure = true;
         } else {
             barcodeLabel.setForeground(Color.BLACK);
-        }                
+        }
         // break out if any of the above requirements fail.
-        if (failure) return;
-     
-       if (crewMember == null) {
+        if (failure) {
+            return;
+        }
+
+        if (crewMember == null) {
             db.insertRow(0, payGradeComboBox.getSelectedItem().toString(), rankComboBox.getSelectedItem().toString(), fNameText.getText(), lNameText.getText(), deptComboBox.getSelectedItem().toString(), barcodeText.getText(), Boolean.TRUE);
         } else {
-            db.insertRow(crewMember.getId(), payGradeComboBox.getSelectedItem().toString(), rankComboBox.getSelectedItem().toString(), fNameText.getText(), lNameText.getText(), deptComboBox.getSelectedItem().toString(), barcodeText.getText(), Boolean.TRUE);  
+            db.insertRow(crewMember.getId(), payGradeComboBox.getSelectedItem().toString(), rankComboBox.getSelectedItem().toString(), fNameText.getText(), lNameText.getText(), deptComboBox.getSelectedItem().toString(), barcodeText.getText(), Boolean.TRUE);
         }
         StatusBoard.sbf.refreshDeptTable(deptComboBox.getSelectedItem().toString());
         this.setVisible(false);
@@ -292,7 +295,7 @@ public class AddEditMember extends javax.swing.JPanel {
     private javax.swing.JButton saveButton;
     // End of variables declaration//GEN-END:variables
 
-        private void setupColors() {
+    private void setupColors() {
         this.setBackground(backgroundColor);
         jdg.setBackground(backgroundColor);
         jdg.setForeground(foregroundColor);
@@ -321,12 +324,11 @@ public class AddEditMember extends javax.swing.JPanel {
         payGradeComboBox.setBackground(backgroundColor);
         payGradeComboBox.setForeground(foregroundColor);
         payGradeLabel.setBackground(backgroundColor);
-        payGradeLabel.setForeground(foregroundColor);        
+        payGradeLabel.setForeground(foregroundColor);
         rankComboBox.setBackground(backgroundColor);
-        rankComboBox.setForeground(foregroundColor);        
+        rankComboBox.setForeground(foregroundColor);
         rankLabel.setBackground(backgroundColor);
-        rankLabel.setForeground(foregroundColor);          
+        rankLabel.setForeground(foregroundColor);
     }
-
 
 }

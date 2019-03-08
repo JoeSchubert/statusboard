@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
@@ -29,6 +30,7 @@ import statusboard.models.*;
 import statusboard.panels.AddEditMember;
 import statusboard.panels.UserList;
 import statusboard.panels.LogsList;
+import statusboard.shell.LaptopScreenBrightness;
 
 public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEventDispatcher {
 
@@ -44,6 +46,7 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
     private static Settings settings;
     private static long initialKeyEventTime = 0;
     private static int scannerTimeThreshold; // Time in milliseconds that the scanner should send it's input within
+    private static boolean dimmed = false;
 
     private final CrewListModel coModel, xoModel, officerModel, chiefModel, engineeringModel, operationsModel, deckModel, supportModel;
 
@@ -62,6 +65,7 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         operationsModel = new CrewListModel(CON.OPERATIONS);
         deckModel = new CrewListModel(CON.DECK);
         supportModel = new CrewListModel(CON.SUPPORT);
+        LaptopScreenBrightness lsb = new LaptopScreenBrightness();
 
         initComponents();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -79,6 +83,21 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
             Date date = new Date();
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
             timeLabel.setText(sdf.format(date));
+            if (settings.autoDimEnabled()) {
+                String nowString = new SimpleDateFormat("HH:mm:ss").format(date);
+                LocalTime target = LocalTime.parse(nowString);
+                // ensure the time falls at night between the specified hours
+                if (target.isAfter(settings.getStartDim()) && target.isBefore(settings.getStopDim())) {
+                    //only try to change the brightness if it hasn't already been changed.
+                    if (!dimmed) {
+                        dimmed = true;
+                        lsb.setBrightness(settings.getDimPercent());
+                    }
+                } else if (dimmed) {
+                    dimmed = false;
+                    lsb.setBrightness(100);
+                }
+            }
         }, 0, 1, TimeUnit.SECONDS);
     }
 

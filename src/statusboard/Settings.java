@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.time.LocalTime;
 import java.util.Properties;
 
 public class Settings {
@@ -12,6 +13,10 @@ public class Settings {
     private static Settings settings = null;
     private static Properties props;
     private static final String CONFIG_FILE = "config.properties";
+    private static LocalTime startDim = null, stopDim = null;
+    private static Boolean autoDimEnabled = null;
+    private static Integer dimPercent = null;
+
     OutputStream output = null;
     InputStream input = null;
 
@@ -93,7 +98,7 @@ public class Settings {
             return val;
         }
     }
-    
+
     private int getInt(String field, int defaultValue) {
         String val = props.getProperty(field);
         if (val == null || val.isEmpty()) {
@@ -119,9 +124,37 @@ public class Settings {
     public String getCutterName() {
         return getString("CutterName", "Coast Guard Cutter");
     }
-    
+
     public int getScannerTimeThreshold() {
         return getInt("ScannerTimeThreshold", 1000);
+    }
+
+    public LocalTime getStartDim() {
+        if (startDim == null) {
+            startDim = LocalTime.parse(getString("startDim", "20:00:00"));
+        }
+        return startDim;
+    }
+
+    public LocalTime getStopDim() {
+        if (stopDim == null) {
+            stopDim = LocalTime.parse(getString("stopDim", "06:00:00"));
+        }
+        return stopDim;
+    }
+    
+    public boolean autoDimEnabled() {
+        if (autoDimEnabled == null) {
+            autoDimEnabled = getBoolean("autoDimEnabled", false);
+        }
+        return autoDimEnabled; 
+    }
+    
+    public int getDimPercent() {
+        if (dimPercent == null) {
+            dimPercent = getInt("DimPercent", 50);
+        }
+        return dimPercent;
     }
 
 }

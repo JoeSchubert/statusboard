@@ -1,6 +1,8 @@
 package statusboard.shell;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 public class LaptopScreenBrightness {
 
@@ -23,8 +25,15 @@ public class LaptopScreenBrightness {
         //protect against any illegitimate values
         if (arg.matches("0.1|0.2|0.3|0.4|0.5|0.6|0.7|0.8|0.9|1.0")) {
             try {
-                String[] command = {"./Linux_Brightness.sh", arg};
+                String line;
+                String[] command = new String[]{"/bin/bash", "-c", "xrandr -q | grep \" connected\" | cut -f 1 -d \" \""};
                 Process process = Runtime.getRuntime().exec(command);
+                try (BufferedReader in = new BufferedReader(new InputStreamReader(process.getInputStream()))) {
+                    while ((line = in.readLine()) != null) {
+                        String nextCommand = "xrandr --output " + line + " --brightness " + arg;
+                        Runtime.getRuntime().exec(nextCommand);
+                    }
+                }
             } catch (IOException e) {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
             }

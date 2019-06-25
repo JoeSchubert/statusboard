@@ -20,6 +20,7 @@ public class AddEditMember extends javax.swing.JPanel {
         initComponents();
         jdg = jdiag;
         crewMember = null;
+        setupColors();
     }
 
     public AddEditMember(JDialog jdiag, CrewMemberObject cmo) {

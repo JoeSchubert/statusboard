@@ -214,7 +214,15 @@ public class RosterDataBaseHelper {
         try {
             Statement stmt = c.createStatement();
             ResultSet result;
-            String sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + DEPT + " = '" + department + "' ORDER BY " + PAYGRADE + " DESC, " + RANK + ", " + LNAME + " COLLATE NOCASE";
+            String sql;
+            if (department.equalsIgnoreCase("Officers")) {
+                sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + DEPT + " = '" + department + "' ORDER BY ("
+                        + " CASE " + PAYGRADE
+                        +  " WHEN 'CADET' THEN '00'"
+                        + " ELSE " + PAYGRADE + " END ) DESC, " + RANK + ", " + LNAME + " COLLATE NOCASE";
+            } else {
+                sql = "SELECT * FROM " + TABLE_NAME + " WHERE " + DEPT + " = '" + department + "' ORDER BY " + PAYGRADE + " DESC, " + RANK + ", " + LNAME + " COLLATE NOCASE";
+            }
             result = stmt.executeQuery(sql);
             while (result.next()) {
                 crewMembers.add(populateCrewMember(result));

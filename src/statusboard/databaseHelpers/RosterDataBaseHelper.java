@@ -312,14 +312,14 @@ public class RosterDataBaseHelper {
 
     private void populateTestData() {
 
-        insertRow(0, "05", "CDR", "CO", "Captain", "CommandingOfficer", "abc123def456", Boolean.TRUE);
-        insertRow(0, "04", "LCDR", "XO", "XO", "ExecutiveOfficer", "abc123def456", Boolean.TRUE);
+        insertRow(0, "O5", "CDR", "CO", "Captain", "CommandingOfficer", "abc123def456", Boolean.TRUE);
+        insertRow(0, "O4", "LCDR", "XO", "XO", "ExecutiveOfficer", "abc123def456", Boolean.TRUE);
 
         for (int i = 0; i <= 5; i++) {
-            insertRow(0, "01", "ENS", "Junior", "Officer" + i, "Officers", "abc123def456", Boolean.TRUE);
+            insertRow(0, "O1", "ENS", "Junior", "Officer" + i, "Officers", "abc123def456", Boolean.TRUE);
         }
         for (int i = 0; i <= 5; i++) {
-            insertRow(0, "01", "ETC", "Electronics", "Chief" + i, "Chiefs", "abc123def456", Boolean.TRUE);
+            insertRow(0, "E7", "ETC", "Electronics", "Chief" + i, "Chiefs", "abc123def456", Boolean.TRUE);
         }
         for (int i = 0; i <= 5; i++) {
             insertRow(0, "E6", "MK1", "Test", "Engineer" + i, "Engineering", "abc123def456", Boolean.TRUE);

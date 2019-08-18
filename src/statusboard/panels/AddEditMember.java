@@ -15,6 +15,7 @@ public class AddEditMember extends javax.swing.JPanel {
     private static RosterDataBaseHelper db = RosterDataBaseHelper.getInstance();
     private final JDialog jdg;
     private CrewMemberObject crewMember = null;
+    private String department = null;
 
     public AddEditMember(JDialog jdiag) {
         initComponents();
@@ -27,6 +28,10 @@ public class AddEditMember extends javax.swing.JPanel {
         jdg = jdiag;
         crewMember = cmo;
         initComponents();
+        
+        if (!cmo.getDepartment().isEmpty()) {
+            department = cmo.getDepartment();
+        }
 
         fNameText.setText(cmo.getFirstName());
         lNameText.setText(cmo.getLastName());
@@ -260,6 +265,9 @@ public class AddEditMember extends javax.swing.JPanel {
             db.insertRow(crewMember.getId(), payGradeComboBox.getSelectedItem().toString(), rankComboBox.getSelectedItem().toString(), fNameText.getText(), lNameText.getText(), deptComboBox.getSelectedItem().toString(), barcodeText.getText(), Boolean.TRUE);
         }
         StatusBoard.sbf.refreshDeptTable(deptComboBox.getSelectedItem().toString());
+        if (department != null) {
+            StatusBoard.sbf.refreshDeptTable(department);
+        }
         this.setVisible(false);
         jdg.dispose();
     }//GEN-LAST:event_saveButtonActionPerformed

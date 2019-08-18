@@ -48,7 +48,7 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
     private static int scannerTimeThreshold; // Time in milliseconds that the scanner should send it's input within
     private static boolean dimmed = false;
 
-    private final CrewListModel coModel, xoModel, officerModel, chiefModel, engineeringModel, operationsModel, deckModel, supportModel;
+    private final CrewListModel coModel, xoModel, officerModel, chiefModel, engineeringModel, operationsModel, deckModel, supportModel, tdyModel;
 
     /**
      * Creates new form StatusBoardFrame
@@ -65,6 +65,7 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         operationsModel = new CrewListModel(CON.OPERATIONS);
         deckModel = new CrewListModel(CON.DECK);
         supportModel = new CrewListModel(CON.SUPPORT);
+        tdyModel = new CrewListModel(CON.TDY);
         LaptopScreenBrightness lsb = new LaptopScreenBrightness();
 
         initComponents();
@@ -145,6 +146,9 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         timeLabel = new javax.swing.JLabel();
         nightModeToggle = new javax.swing.JToggleButton();
         numberAfloat = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        supportJScrollPane1 = new javax.swing.JScrollPane();
+        tdyTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -310,6 +314,20 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
 
         numberAfloat.setText("On-board: XX");
 
+        jLabel5.setText("TDY");
+
+        tdyTable.setAutoCreateRowSorter(true);
+        tdyTable.setModel(tdyModel);
+        tdyTable.setAutoscrolls(false);
+        tdyTable.setName("tdyTable");
+        tdyTable.setOpaque(false);
+        tdyTable.setRowSelectionAllowed(false);
+        tdyTable.setShowHorizontalLines(false);
+        tdyTable.setShowVerticalLines(false);
+        tdyTable.setTableHeader(null);
+        tdyTable.setUpdateSelectionOnSort(false);
+        supportJScrollPane1.setViewportView(tdyTable);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -359,12 +377,14 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(supportJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(supportJScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(timeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(managerUsersButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(logsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                    .addComponent(logsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(supportJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(cutterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 812, Short.MAX_VALUE)
@@ -420,8 +440,13 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                         .addComponent(lastScanColorBox, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(15, 15, 15))))
-                            .addComponent(supportJScrollPane, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(engineeringJScrollPane)))
+                            .addComponent(engineeringJScrollPane)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(supportJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(supportJScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(logsButton)
@@ -481,6 +506,7 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lastScanColorBox;
     private javax.swing.JLabel lastScanLabel;
@@ -496,13 +522,15 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
     private javax.swing.JScrollPane operationsJScrollPane;
     private javax.swing.JTable operationsTable;
     private javax.swing.JScrollPane supportJScrollPane;
+    private javax.swing.JScrollPane supportJScrollPane1;
     private javax.swing.JTable supportTable;
+    private javax.swing.JTable tdyTable;
     private javax.swing.JLabel timeLabel;
     private javax.swing.JTable xoTable;
     // End of variables declaration//GEN-END:variables
 
     private void setupTablesLAF() {
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < 9; i++) {
             JTable temp = getTable(i);
             temp.setAutoResizeMode(0);
             temp.setOpaque(false);
@@ -688,6 +716,8 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
             return deckModel;
         } else if (dept.equals(CON.getDepartmentByPos(7))) {
             return supportModel;
+        } else if (dept.equals(CON.getDepartmentByPos(8))) {
+            return tdyModel;
         }
         return null;
     }
@@ -710,6 +740,8 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
                 return deckTable;
             case 7:
                 return supportTable;
+            case 8:
+                return tdyTable;
             default:
                 return null;
         }

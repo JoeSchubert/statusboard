@@ -14,6 +14,7 @@ public class Constants {
     public final String OPERATIONS = "Operations";
     public final String DECK = "Deck";
     public final String SUPPORT = "Support";
+    public final String TDY = "TDY";
 
     public static HashMap<String, Integer> departmentMap = new HashMap<String, Integer>();
 
@@ -26,6 +27,7 @@ public class Constants {
         departmentMap.put(OPERATIONS, 5);
         departmentMap.put(DECK, 6);
         departmentMap.put(SUPPORT, 7);
+        departmentMap.put(TDY, 8);
     }
 
     public int getPos(String department) {
@@ -129,7 +131,7 @@ public class Constants {
     }
 
     public String[] getDepartments() {
-        return new String[]{"", COMMANDING_OFFICER, EXECUTIVE_OFFICER, OFFICERS, CHIEFS, ENGINEERING, OPERATIONS, DECK, SUPPORT};
+        return new String[]{"", COMMANDING_OFFICER, EXECUTIVE_OFFICER, OFFICERS, CHIEFS, ENGINEERING, OPERATIONS, DECK, SUPPORT, TDY};
     }
 
     public String getDatabaseName() {

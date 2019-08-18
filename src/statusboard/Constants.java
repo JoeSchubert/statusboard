@@ -101,19 +101,19 @@ public class Constants {
                 break;
             }
             case "E7": {
-                str = new String[]{"BMC", "CSC", "DCC", "EMC", "ETC", "GMC", "ITC", "MEC", "MKC", "OSC", "SKC", "YNC"};
+                str = new String[]{"AETC", "AMTC", "BMC", "CSC", "DCC", "EMC", "ETC", "GMC", "ITC", "MEC", "MKC", "OSC", "SKC", "YNC"};
                 break;
             }
             case "E6": {
-                str = new String[]{"BM1", "CS1", "DC1", "EM1", "ET1", "GM1", "IT1", "IS1", "ME1", "MK1", "OS1", "SK1", "YN1"};
+                str = new String[]{"AET1", "AMT1", "BM1", "CS1", "DC1", "EM1", "ET1", "GM1", "IT1", "IS1", "ME1", "MK1", "OS1", "SK1", "YN1"};
                 break;
             }
             case "E5": {
-                str = new String[]{"BM2", "CS2", "DC2", "EM2", "ET2", "GM2", "IT2", "IS2", "ME2", "MK2", "OS2", "SK2", "YN2"};
+                str = new String[]{"AET2" , "AMT2", "BM2", "CS2", "DC2", "EM2", "ET2", "GM2", "IT2", "IS2", "ME2", "MK2", "OS2", "SK2", "YN2"};
                 break;
             }
             case "E4": {
-                str = new String[]{"BM3", "CS3", "DC3", "EM3", "ET3", "GM3", "IT3", "IS3", "ME3", "MK3", "OS3", "SK3", "YN3"};
+                str = new String[]{"AET3", "AMT3", "BM3", "CS3", "DC3", "EM3", "ET3", "GM3", "IT3", "IS3", "ME3", "MK3", "OS3", "SK3", "YN3"};
                 break;
             }
             case "E3": {

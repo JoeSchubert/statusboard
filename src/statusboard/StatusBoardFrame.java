@@ -14,7 +14,6 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -47,6 +46,7 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
     private static long initialKeyEventTime = 0;
     private static int scannerTimeThreshold; // Time in milliseconds that the scanner should send it's input within
     private static boolean dimmed = false;
+    private static Color lastScanColor = Color.GREEN;
 
     private final CrewListModel coModel, xoModel, officerModel, chiefModel, engineeringModel, operationsModel, deckModel, supportModel, tdyModel;
 
@@ -141,7 +141,6 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         cutterLabel = new javax.swing.JLabel();
         managerUsersButton = new javax.swing.JButton();
         logsButton = new javax.swing.JButton();
-        lastScanColorBox = new javax.swing.JLabel();
         lastScanTimeLabel = new javax.swing.JLabel();
         timeLabel = new javax.swing.JLabel();
         nightModeToggle = new javax.swing.JToggleButton();
@@ -328,8 +327,6 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
             }
         });
 
-        lastScanColorBox.setToolTipText("");
-
         lastScanTimeLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lastScanTimeLabel.setToolTipText("");
 
@@ -380,22 +377,20 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
                             .addComponent(officersJScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(officersLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(commandingOfficerJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(commandingOfficerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(commandingOfficerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(executiveOfficerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(executiveOfficerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE)
                             .addComponent(executiveOfficerJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                             .addComponent(chiefsLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(chiefsJScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(lastScanColorBox, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lastScanNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lastScanLabel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lastScanTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(lastScanTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lastScanNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -465,10 +460,8 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(lastScanLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(lastScanTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(lastScanNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
-                                    .addComponent(lastScanColorBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(lastScanNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(8, 8, 8))
                             .addComponent(engineeringJScrollPane)
                             .addComponent(operationsJScrollPane)
@@ -546,7 +539,6 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel lastScanColorBox;
     private javax.swing.JLabel lastScanLabel;
     private javax.swing.JLabel lastScanNameLabel;
     private javax.swing.JLabel lastScanTimeLabel;
@@ -621,6 +613,7 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
                 ((JToggleButton) comp).setForeground(foregroundColor);
             }
         }
+        lastScanNameLabel.setForeground(lastScanColor);
     }
 
     @Override
@@ -645,11 +638,13 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
                             lastScanTimeLabel.setText(" @ " + sdf.format(date));
                             // Reverse logic on the cm.isStatus() as it is being toggled above
                             if (cm.isStatus()) {
-                                lastScanColorBox.setBackground(Color.RED);
-                                lastScanColorBox.setOpaque(true);
+                                lastScanColor = Color.RED;
+                                lastScanNameLabel.setForeground(lastScanColor);
+                                //lastScanNameLabel.setOpaque(true);
                             } else {
-                                lastScanColorBox.setBackground(Color.GREEN);
-                                lastScanColorBox.setOpaque(true);
+                                lastScanColor = Color.GREEN;
+                                lastScanNameLabel.setForeground(lastScanColor);
+                                //lastScanNameLabel.setOpaque(true);
                             }
                         } else {
                             displayAddEditUser();

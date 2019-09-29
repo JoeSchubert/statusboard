@@ -15,6 +15,7 @@ public class StatusBoard {
         manager.addKeyEventDispatcher(sbf);
 
         java.awt.EventQueue.invokeLater(() -> {
+            sbf.setSize(1024,768);
             sbf.pack();
             sbf.setLocationRelativeTo(null);
             sbf.setVisible(true);

@@ -69,7 +69,7 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         LaptopScreenBrightness lsb = new LaptopScreenBrightness();
 
         initComponents();
-        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
+        //this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
         setupTablesLAF();
         setupColors();
@@ -153,10 +153,13 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         commandingOfficerLabel.setText("Commanding Officer");
+        commandingOfficerLabel.setMaximumSize(new java.awt.Dimension(165, 15));
 
         coTable.setAutoCreateRowSorter(true);
         coTable.setModel(coModel);
         coTable.setAutoscrolls(false);
+        coTable.setMaximumSize(new java.awt.Dimension(165, 15));
+        coTable.setMinimumSize(new java.awt.Dimension(140, 15));
         coTable.setName("coTable"); // NOI18N
         coTable.setOpaque(false);
         coTable.setRowSelectionAllowed(false);
@@ -167,6 +170,11 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         commandingOfficerJScrollPane.setViewportView(coTable);
 
         executiveOfficerLabel.setText("Executive Officer");
+        executiveOfficerLabel.setMaximumSize(new java.awt.Dimension(165, 15));
+        executiveOfficerLabel.setMinimumSize(new java.awt.Dimension(140, 15));
+
+        executiveOfficerJScrollPane.setMaximumSize(new java.awt.Dimension(165, 15));
+        executiveOfficerJScrollPane.setMinimumSize(new java.awt.Dimension(140, 15));
 
         xoTable.setAutoCreateRowSorter(true);
         xoTable.setModel(xoModel);
@@ -182,6 +190,8 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         executiveOfficerJScrollPane.setViewportView(xoTable);
 
         officersLabel.setText("Officers");
+        officersLabel.setMaximumSize(new java.awt.Dimension(165, 15));
+        officersLabel.setMinimumSize(new java.awt.Dimension(140, 15));
         officersLabel.setName("officersLabel"); // NOI18N
 
         officersTable.setAutoCreateRowSorter(true);
@@ -189,6 +199,8 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         officersTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_LAST_COLUMN);
         officersTable.setAutoscrolls(false);
         officersTable.setEditingColumn(0);
+        officersTable.setMaximumSize(new java.awt.Dimension(165, 15));
+        officersTable.setMinimumSize(new java.awt.Dimension(140, 15));
         officersTable.setName("officersTable"); // NOI18N
         officersTable.setOpaque(false);
         officersTable.setRowSelectionAllowed(false);
@@ -199,11 +211,15 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         officersJScrollPane.setViewportView(officersTable);
 
         chiefsLabel.setText("Chiefs");
+        chiefsLabel.setMaximumSize(new java.awt.Dimension(165, 15));
+        chiefsLabel.setMinimumSize(new java.awt.Dimension(140, 15));
         chiefsLabel.setName("chiefsLabel"); // NOI18N
 
         engineeringTable.setAutoCreateRowSorter(true);
         engineeringTable.setModel(engineeringModel);
         engineeringTable.setAutoscrolls(false);
+        engineeringTable.setMaximumSize(new java.awt.Dimension(165, 15));
+        engineeringTable.setMinimumSize(new java.awt.Dimension(140, 15));
         engineeringTable.setName("engineeringTable"); // NOI18N
         engineeringTable.setOpaque(false);
         engineeringTable.setRowSelectionAllowed(false);
@@ -213,19 +229,23 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         engineeringTable.setUpdateSelectionOnSort(false);
         engineeringJScrollPane.setViewportView(engineeringTable);
 
-        lastScanLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        lastScanLabel.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
         lastScanLabel.setText("Last Scan");
         lastScanLabel.setFocusable(false);
         lastScanLabel.setName("lastScanLabel"); // NOI18N
 
-        lastScanNameLabel.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        lastScanNameLabel.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         lastScanNameLabel.setName("lastScanName"); // NOI18N
 
         jLabel1.setText("Engineering");
+        jLabel1.setMaximumSize(new java.awt.Dimension(165, 15));
+        jLabel1.setMinimumSize(new java.awt.Dimension(140, 15));
 
         chiefsTable.setAutoCreateRowSorter(true);
         chiefsTable.setModel(chiefModel);
         chiefsTable.setAutoscrolls(false);
+        chiefsTable.setMaximumSize(new java.awt.Dimension(165, 15));
+        chiefsTable.setMinimumSize(new java.awt.Dimension(140, 15));
         chiefsTable.setName("chiefsTable"); // NOI18N
         chiefsTable.setOpaque(false);
         chiefsTable.setRowSelectionAllowed(false);
@@ -238,6 +258,8 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         operationsTable.setAutoCreateRowSorter(true);
         operationsTable.setModel(operationsModel);
         operationsTable.setAutoscrolls(false);
+        operationsTable.setMaximumSize(new java.awt.Dimension(165, 15));
+        operationsTable.setMinimumSize(new java.awt.Dimension(140, 15));
         operationsTable.setName("chiefsTable"); // NOI18N
         operationsTable.setOpaque(false);
         operationsTable.setRowSelectionAllowed(false);
@@ -248,10 +270,14 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         operationsJScrollPane.setViewportView(operationsTable);
 
         jLabel2.setText("Operations");
+        jLabel2.setMaximumSize(new java.awt.Dimension(165, 15));
+        jLabel2.setMinimumSize(new java.awt.Dimension(140, 15));
 
         deckTable.setAutoCreateRowSorter(true);
         deckTable.setModel(deckModel);
         deckTable.setAutoscrolls(false);
+        deckTable.setMaximumSize(new java.awt.Dimension(165, 15));
+        deckTable.setMinimumSize(new java.awt.Dimension(140, 15));
         deckTable.setName("chiefsTable"); // NOI18N
         deckTable.setOpaque(false);
         deckTable.setRowSelectionAllowed(false);
@@ -262,12 +288,18 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         deckJScrollPane.setViewportView(deckTable);
 
         jLabel3.setText("Deck");
+        jLabel3.setMaximumSize(new java.awt.Dimension(165, 15));
+        jLabel3.setMinimumSize(new java.awt.Dimension(140, 15));
 
         jLabel4.setText("Support");
+        jLabel4.setMaximumSize(new java.awt.Dimension(165, 15));
+        jLabel4.setMinimumSize(new java.awt.Dimension(140, 15));
 
         supportTable.setAutoCreateRowSorter(true);
         supportTable.setModel(supportModel);
         supportTable.setAutoscrolls(false);
+        supportTable.setMaximumSize(new java.awt.Dimension(165, 15));
+        supportTable.setMinimumSize(new java.awt.Dimension(140, 15));
         supportTable.setName("chiefsTable"); // NOI18N
         supportTable.setOpaque(false);
         supportTable.setRowSelectionAllowed(false);
@@ -277,8 +309,9 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         supportTable.setUpdateSelectionOnSort(false);
         supportJScrollPane.setViewportView(supportTable);
 
-        cutterLabel.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        cutterLabel.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         cutterLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cutterLabel.setMinimumSize(new java.awt.Dimension(600, 50));
         cutterLabel.setName("cutterLabel"); // NOI18N
 
         managerUsersButton.setText("Manage Users");
@@ -306,6 +339,9 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
 
         nightModeToggle.setText("Night Mode");
         nightModeToggle.setAlignmentY(0.0F);
+        nightModeToggle.setMargin(new java.awt.Insets(2, 6, 2, 6));
+        nightModeToggle.setMaximumSize(new java.awt.Dimension(126, 31));
+        nightModeToggle.setMinimumSize(new java.awt.Dimension(126, 31));
         nightModeToggle.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nightModeToggleActionPerformed(evt);
@@ -315,10 +351,14 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         numberAfloat.setText("On-board: XX");
 
         jLabel5.setText("TDY");
+        jLabel5.setMaximumSize(new java.awt.Dimension(165, 15));
+        jLabel5.setMinimumSize(new java.awt.Dimension(140, 15));
 
         tdyTable.setAutoCreateRowSorter(true);
         tdyTable.setModel(tdyModel);
         tdyTable.setAutoscrolls(false);
+        tdyTable.setMaximumSize(new java.awt.Dimension(165, 15));
+        tdyTable.setMinimumSize(new java.awt.Dimension(140, 15));
         tdyTable.setName("tdyTable");
         tdyTable.setOpaque(false);
         tdyTable.setRowSelectionAllowed(false);
@@ -336,63 +376,59 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(officersLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                            .addComponent(officersJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(officersJScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(officersLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(commandingOfficerJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(commandingOfficerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(chiefsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                            .addComponent(chiefsJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(executiveOfficerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(executiveOfficerJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(chiefsLabel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(chiefsJScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lastScanColorBox, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lastScanNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lastScanLabel)
-                        .addGap(18, 18, 18)
-                        .addComponent(lastScanTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lastScanColorBox, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lastScanNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(commandingOfficerJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(commandingOfficerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(executiveOfficerJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(executiveOfficerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE))))
-                .addGap(18, 18, 18)
+                        .addComponent(lastScanTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(cutterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(engineeringJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(operationsJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(operationsJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(deckJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(deckJScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(supportJScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
+                            .addComponent(supportJScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE)
+                            .addComponent(supportJScrollPane, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(timeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(timeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(managerUsersButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(logsButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addComponent(supportJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cutterLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 812, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nightModeToggle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(numberAfloat, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap())
+                                    .addComponent(numberAfloat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(logsButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(managerUsersButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(nightModeToggle, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -401,59 +437,61 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(commandingOfficerLabel)
-                            .addComponent(executiveOfficerLabel))
+                            .addComponent(commandingOfficerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(executiveOfficerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(commandingOfficerJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(executiveOfficerJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
-                    .addComponent(cutterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(nightModeToggle)
-                        .addGap(18, 18, 18)
-                        .addComponent(numberAfloat)))
-                .addGap(3, 3, 3)
+                            .addComponent(executiveOfficerJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addGap(12, 12, 12))
+                    .addComponent(cutterLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(officersLabel)
-                            .addComponent(chiefsLabel)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel2))
+                            .addComponent(officersLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(chiefsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(deckJScrollPane)
-                            .addComponent(operationsJScrollPane)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(chiefsJScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 454, Short.MAX_VALUE)
-                                    .addComponent(officersJScrollPane))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(lastScanLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lastScanTimeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lastScanNameLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                        .addComponent(lastScanColorBox, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(15, 15, 15))))
-                            .addComponent(engineeringJScrollPane)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(supportJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(chiefsJScrollPane, javax.swing.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+                                    .addComponent(officersJScrollPane))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lastScanLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lastScanTimeLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel5)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(lastScanNameLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
+                                    .addComponent(lastScanColorBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(8, 8, 8))
+                            .addComponent(engineeringJScrollPane)
+                            .addComponent(operationsJScrollPane)
+                            .addComponent(deckJScrollPane)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(supportJScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(supportJScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))))
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(0, 0, Short.MAX_VALUE)
+                                        .addComponent(logsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(managerUsersButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(timeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(supportJScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(logsButton)
+                        .addComponent(nightModeToggle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(managerUsersButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(timeLabel)))
+                        .addComponent(numberAfloat)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -463,7 +501,7 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -475,10 +513,6 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void managerUsersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managerUsersButtonActionPerformed
-        displayUserList();
-    }//GEN-LAST:event_managerUsersButtonActionPerformed
-
     private void nightModeToggleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nightModeToggleActionPerformed
         settings.setNightMode(nightModeToggle.isSelected());
         setupColors();
@@ -487,6 +521,10 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
     private void logsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logsButtonActionPerformed
         displayLogList();
     }//GEN-LAST:event_logsButtonActionPerformed
+
+    private void managerUsersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managerUsersButtonActionPerformed
+        displayUserList();
+    }//GEN-LAST:event_managerUsersButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane chiefsJScrollPane;
@@ -546,12 +584,14 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
             col.setWidth(0);
 
             col = colModel.getColumn(1);
+            col.setMinWidth(40);
             col.setPreferredWidth(40);
             col.setWidth(40);
 
             col = colModel.getColumn(2);
-            col.setPreferredWidth(120);
-            col.setWidth(120);
+            col.setMinWidth(80);
+            col.setPreferredWidth(80);
+            col.setWidth(80);
             col.sizeWidthToFit();
         }
     }

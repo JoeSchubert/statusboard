@@ -23,9 +23,9 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -45,85 +45,78 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="officersJScrollPane" alignment="1" pref="0" max="32767" attributes="0"/>
+                              <Component id="officersLabel" alignment="1" max="32767" attributes="0"/>
+                              <Component id="commandingOfficerJScrollPane" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="commandingOfficerLabel" alignment="0" pref="146" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="executiveOfficerLabel" alignment="0" pref="146" max="32767" attributes="0"/>
+                              <Component id="executiveOfficerJScrollPane" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="chiefsLabel" alignment="1" max="32767" attributes="0"/>
+                              <Component id="chiefsJScrollPane" alignment="1" min="-2" pref="140" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="officersLabel" pref="180" max="32767" attributes="0"/>
-                              <Component id="officersJScrollPane" pref="0" max="32767" attributes="0"/>
-                          </Group>
+                          <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
+                          <Component id="lastScanColorBox" min="-2" pref="46" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="chiefsLabel" pref="180" max="32767" attributes="0"/>
-                              <Component id="chiefsJScrollPane" pref="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="lastScanNameLabel" min="-2" pref="240" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="lastScanLabel" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                          <Component id="lastScanTimeLabel" min="-2" pref="235" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lastScanColorBox" min="-2" pref="47" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="lastScanNameLabel" min="-2" pref="340" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="commandingOfficerJScrollPane" pref="0" max="32767" attributes="0"/>
-                              <Component id="commandingOfficerLabel" pref="180" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="executiveOfficerJScrollPane" pref="0" max="32767" attributes="0"/>
-                              <Component id="executiveOfficerLabel" pref="180" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="lastScanTimeLabel" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="engineeringJScrollPane" pref="0" max="32767" attributes="0"/>
-                              <Component id="jLabel1" pref="190" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="operationsJScrollPane" min="-2" pref="189" max="-2" attributes="0"/>
-                              <Component id="jLabel2" min="-2" pref="189" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="deckJScrollPane" min="-2" pref="189" max="-2" attributes="0"/>
-                              <Component id="jLabel3" min="-2" pref="189" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jLabel4" alignment="0" min="-2" pref="189" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="supportJScrollPane1" min="-2" pref="189" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="timeLabel" max="32767" attributes="0"/>
-                                      <Component id="managerUsersButton" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="logsButton" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <Component id="supportJScrollPane" alignment="0" min="-2" pref="189" max="-2" attributes="0"/>
-                              <Component id="jLabel5" min="-2" pref="189" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="cutterLabel" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Component id="cutterLabel" pref="812" max="32767" attributes="0"/>
-                          <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="nightModeToggle" max="32767" attributes="0"/>
-                              <Component id="numberAfloat" max="32767" attributes="0"/>
+                              <Component id="engineeringJScrollPane" pref="0" max="32767" attributes="0"/>
+                              <Component id="jLabel1" pref="140" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="operationsJScrollPane" pref="0" max="32767" attributes="0"/>
+                              <Component id="jLabel2" pref="140" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel3" pref="140" max="32767" attributes="0"/>
+                              <Component id="deckJScrollPane" alignment="1" pref="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="supportJScrollPane1" pref="0" max="32767" attributes="0"/>
+                              <Component id="jLabel4" pref="140" max="32767" attributes="0"/>
+                              <Component id="supportJScrollPane" alignment="1" pref="0" max="32767" attributes="0"/>
+                              <Component id="jLabel5" alignment="0" pref="140" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="timeLabel" alignment="0" max="32767" attributes="0"/>
+                              <Group type="102" alignment="1" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="numberAfloat" alignment="1" min="-2" pref="104" max="-2" attributes="0"/>
+                                      <Component id="logsButton" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="managerUsersButton" alignment="1" max="32767" attributes="0"/>
+                                      <Component id="nightModeToggle" alignment="1" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -134,76 +127,78 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="commandingOfficerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="executiveOfficerLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="commandingOfficerLabel" alignment="3" max="32767" attributes="0"/>
+                              <Component id="executiveOfficerLabel" alignment="3" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="commandingOfficerJScrollPane" min="-2" pref="20" max="-2" attributes="0"/>
                               <Component id="executiveOfficerJScrollPane" pref="0" max="32767" attributes="0"/>
                           </Group>
+                          <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="cutterLabel" min="-2" pref="53" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="nightModeToggle" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="numberAfloat" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="cutterLabel" alignment="0" min="-2" pref="53" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                  <EmptySpace min="12" pref="12" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="officersLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="chiefsLabel" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="officersLabel" alignment="3" max="32767" attributes="0"/>
+                              <Component id="chiefsLabel" alignment="3" max="32767" attributes="0"/>
+                              <Component id="jLabel1" alignment="3" max="32767" attributes="0"/>
+                              <Component id="jLabel2" alignment="3" max="32767" attributes="0"/>
+                              <Component id="jLabel3" alignment="3" max="32767" attributes="0"/>
+                              <Component id="jLabel4" alignment="3" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="deckJScrollPane" alignment="0" max="32767" attributes="0"/>
-                              <Component id="operationsJScrollPane" alignment="0" max="32767" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="chiefsJScrollPane" pref="454" max="32767" attributes="0"/>
+                                      <Component id="chiefsJScrollPane" pref="415" max="32767" attributes="0"/>
                                       <Component id="officersJScrollPane" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="lastScanLabel" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
-                                      <Component id="lastScanTimeLabel" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                                  <EmptySpace pref="56" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="lastScanLabel" max="32767" attributes="0"/>
+                                      <Component id="lastScanTimeLabel" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="lastScanNameLabel" min="-2" pref="85" max="-2" attributes="0"/>
-                                      <Group type="102" alignment="1" attributes="0">
-                                          <Component id="lastScanColorBox" min="-2" pref="47" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
-                                      </Group>
+                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="lastScanNameLabel" pref="56" max="32767" attributes="0"/>
+                                      <Component id="lastScanColorBox" max="32767" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
                               </Group>
                               <Component id="engineeringJScrollPane" max="32767" attributes="0"/>
+                              <Component id="operationsJScrollPane" alignment="0" max="32767" attributes="0"/>
+                              <Component id="deckJScrollPane" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Component id="supportJScrollPane" min="-2" pref="247" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="supportJScrollPane" min="-2" pref="272" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="supportJScrollPane1" pref="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                          <Component id="logsButton" min="-2" pref="33" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                                          <Component id="managerUsersButton" min="-2" pref="33" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                                          <Component id="timeLabel" min="-2" pref="24" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="supportJScrollPane1" pref="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                           </Group>
                       </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="logsButton" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="nightModeToggle" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="managerUsersButton" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="timeLabel" min="-2" max="-2" attributes="0"/>
+                          <Component id="numberAfloat" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -212,6 +207,9 @@
         <Component class="javax.swing.JLabel" name="commandingOfficerLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Commanding Officer"/>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[165, 15]"/>
+            </Property>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="commandingOfficerJScrollPane">
@@ -231,6 +229,12 @@
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0"/>
                 </Property>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[165, 15]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[140, 15]"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="coTable" noResource="true"/>
                 <Property name="opaque" type="boolean" value="false"/>
                 <Property name="rowSelectionAllowed" type="boolean" value="false"/>
@@ -247,9 +251,23 @@
         <Component class="javax.swing.JLabel" name="executiveOfficerLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Executive Officer"/>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[165, 15]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[140, 15]"/>
+            </Property>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="executiveOfficerJScrollPane">
+          <Properties>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[165, 15]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[140, 15]"/>
+            </Property>
+          </Properties>
           <AuxValues>
             <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
           </AuxValues>
@@ -283,6 +301,12 @@
         <Component class="javax.swing.JLabel" name="officersLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Officers"/>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[165, 15]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[140, 15]"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="officersLabel" noResource="true"/>
           </Properties>
         </Component>
@@ -305,6 +329,12 @@
                   <TableColumnModel selectionModel="0"/>
                 </Property>
                 <Property name="editingColumn" type="int" value="0"/>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[165, 15]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[140, 15]"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="officersTable" noResource="true"/>
                 <Property name="opaque" type="boolean" value="false"/>
                 <Property name="rowSelectionAllowed" type="boolean" value="false"/>
@@ -321,6 +351,12 @@
         <Component class="javax.swing.JLabel" name="chiefsLabel">
           <Properties>
             <Property name="text" type="java.lang.String" value="Chiefs"/>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[165, 15]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[140, 15]"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="chiefsLabel" noResource="true"/>
           </Properties>
         </Component>
@@ -341,6 +377,12 @@
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0"/>
                 </Property>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[165, 15]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[140, 15]"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="engineeringTable" noResource="true"/>
                 <Property name="opaque" type="boolean" value="false"/>
                 <Property name="rowSelectionAllowed" type="boolean" value="false"/>
@@ -357,7 +399,7 @@
         <Component class="javax.swing.JLabel" name="lastScanLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="24" style="1"/>
+              <Font name="Dialog" size="18" style="1"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Last Scan"/>
             <Property name="focusable" type="boolean" value="false"/>
@@ -367,7 +409,7 @@
         <Component class="javax.swing.JLabel" name="lastScanNameLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="30" style="1"/>
+              <Font name="Dialog" size="24" style="1"/>
             </Property>
             <Property name="name" type="java.lang.String" value="lastScanName" noResource="true"/>
           </Properties>
@@ -375,6 +417,12 @@
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Engineering"/>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[165, 15]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[140, 15]"/>
+            </Property>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="chiefsJScrollPane">
@@ -393,6 +441,12 @@
                 <Property name="autoscrolls" type="boolean" value="false"/>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0"/>
+                </Property>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[165, 15]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[140, 15]"/>
                 </Property>
                 <Property name="name" type="java.lang.String" value="chiefsTable" noResource="true"/>
                 <Property name="opaque" type="boolean" value="false"/>
@@ -424,6 +478,12 @@
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0"/>
                 </Property>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[165, 15]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[140, 15]"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="chiefsTable" noResource="true"/>
                 <Property name="opaque" type="boolean" value="false"/>
                 <Property name="rowSelectionAllowed" type="boolean" value="false"/>
@@ -440,6 +500,12 @@
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="text" type="java.lang.String" value="Operations"/>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[165, 15]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[140, 15]"/>
+            </Property>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="deckJScrollPane">
@@ -459,6 +525,12 @@
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0"/>
                 </Property>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[165, 15]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[140, 15]"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="chiefsTable" noResource="true"/>
                 <Property name="opaque" type="boolean" value="false"/>
                 <Property name="rowSelectionAllowed" type="boolean" value="false"/>
@@ -475,11 +547,23 @@
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="text" type="java.lang.String" value="Deck"/>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[165, 15]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[140, 15]"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
             <Property name="text" type="java.lang.String" value="Support"/>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[165, 15]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[140, 15]"/>
+            </Property>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="supportJScrollPane">
@@ -499,6 +583,12 @@
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0"/>
                 </Property>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[165, 15]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[140, 15]"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="chiefsTable" noResource="true"/>
                 <Property name="opaque" type="boolean" value="false"/>
                 <Property name="rowSelectionAllowed" type="boolean" value="false"/>
@@ -515,9 +605,12 @@
         <Component class="javax.swing.JLabel" name="cutterLabel">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Dialog" size="36" style="1"/>
+              <Font name="Dialog" size="30" style="1"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[600, 50]"/>
+            </Property>
             <Property name="name" type="java.lang.String" value="cutterLabel" noResource="true"/>
           </Properties>
         </Component>
@@ -563,6 +656,15 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Night Mode"/>
             <Property name="alignmentY" type="float" value="0.0"/>
+            <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="[2, 6, 2, 6]"/>
+            </Property>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[126, 31]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[126, 31]"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nightModeToggleActionPerformed"/>
@@ -576,6 +678,12 @@
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
             <Property name="text" type="java.lang.String" value="TDY"/>
+            <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[165, 15]"/>
+            </Property>
+            <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+              <Dimension value="[140, 15]"/>
+            </Property>
           </Properties>
         </Component>
         <Container class="javax.swing.JScrollPane" name="supportJScrollPane1">
@@ -594,6 +702,12 @@
                 <Property name="autoscrolls" type="boolean" value="false"/>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                   <TableColumnModel selectionModel="0"/>
+                </Property>
+                <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[165, 15]"/>
+                </Property>
+                <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[140, 15]"/>
                 </Property>
                 <Property name="name" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
                   <Connection code="&quot;tdyTable&quot;" type="code"/>

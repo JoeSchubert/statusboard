@@ -1,12 +1,17 @@
 package statusboard.panels;
 
+import java.io.File;
 import javax.swing.JDialog;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableRowSorter;
 import static statusboard.StatusBoardFrame.backgroundColor;
 import static statusboard.StatusBoardFrame.foregroundColor;
 import statusboard.TableColumnAdjuster;
+import statusboard.databaseHelpers.LoggingDataBaseHelper;
 import statusboard.models.LogsListModel;
 
 /**
@@ -58,6 +63,7 @@ public class LogsList extends javax.swing.JPanel {
         filterText = new javax.swing.JTextField();
         filterButton = new javax.swing.JButton();
         clearFilterButton = new javax.swing.JButton();
+        exportLogsButton = new javax.swing.JButton();
 
         logsListTable.setModel(logsListModel);
         logsListTable.setColumnSelectionAllowed(true);
@@ -98,6 +104,13 @@ public class LogsList extends javax.swing.JPanel {
             }
         });
 
+        exportLogsButton.setText("Export Logs");
+        exportLogsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportLogsButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -112,7 +125,8 @@ public class LogsList extends javax.swing.JPanel {
                         .addComponent(filterButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(clearFilterButton)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(exportLogsButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -124,7 +138,8 @@ public class LogsList extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(filterText, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filterButton)
-                    .addComponent(clearFilterButton))
+                    .addComponent(clearFilterButton)
+                    .addComponent(exportLogsButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -141,9 +156,50 @@ public class LogsList extends javax.swing.JPanel {
         filterLogs();
     }//GEN-LAST:event_filterTextActionPerformed
 
+    private void exportLogsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportLogsButtonActionPerformed
+        // TODO add your handling code here:
+        final JFileChooser chooser = new JFileChooser( new File(System.getProperty("user.home")) )
+        {  
+            @Override
+            public void approveSelection()
+            {
+                if (getSelectedFile().exists())
+                {
+                    int n = JOptionPane.showConfirmDialog(
+                        this,
+                        "Do You Want to Overwrite File?",
+                        "Confirm Overwrite",
+                        JOptionPane.YES_NO_OPTION);
+
+                    if (n == JOptionPane.YES_OPTION)
+                        super.approveSelection();
+                }
+                else
+                    super.approveSelection();
+            }
+        };
+        
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV Files", "csv");
+        chooser.setFileFilter(filter);
+        chooser.setSelectedFile( new File("LogExport.csv") );
+        int returnVal = chooser.showSaveDialog(null);
+
+        if(returnVal == JFileChooser.APPROVE_OPTION)
+        {
+            LoggingDataBaseHelper db = LoggingDataBaseHelper.getInstance();
+            String filePath = chooser.getSelectedFile().toString();
+            if (filePath.substring(filePath.length() - 4).equalsIgnoreCase(".csv")) {
+                db.saveLog(new File(filePath));
+            } else{
+                db.saveLog(new File(filePath + ".csv"));
+            }
+        }
+    }//GEN-LAST:event_exportLogsButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton clearFilterButton;
+    private javax.swing.JButton exportLogsButton;
     private javax.swing.JButton filterButton;
     private javax.swing.JTextField filterText;
     private javax.swing.JPanel jPanel1;
@@ -176,6 +232,8 @@ public class LogsList extends javax.swing.JPanel {
         clearFilterButton.setForeground(foregroundColor);
         filterButton.setBackground(backgroundColor);
         filterButton.setForeground(foregroundColor);
+        exportLogsButton.setBackground(backgroundColor);
+        exportLogsButton.setForeground(foregroundColor);
         jScrollPane1.setBackground(backgroundColor);
         jScrollPane1.setForeground(foregroundColor);
         jScrollPane1.getViewport().setBackground(backgroundColor);

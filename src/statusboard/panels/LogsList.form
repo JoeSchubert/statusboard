@@ -26,7 +26,8 @@
                       <Component id="filterButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="clearFilterButton" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="exportLogsButton" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -43,6 +44,7 @@
                   <Component id="filterText" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="filterButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="clearFilterButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="exportLogsButton" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -115,6 +117,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clearFilterButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="exportLogsButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Export Logs"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="exportLogsButtonActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

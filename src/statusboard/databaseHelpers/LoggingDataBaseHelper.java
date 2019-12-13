@@ -1,9 +1,14 @@
 package statusboard.databaseHelpers;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
@@ -140,6 +145,39 @@ public class LoggingDataBaseHelper {
             stmt.closeOnCompletion();
             stmt.execute("DELETE FROM " + TABLE_NAME + " WHERE " + DATETIME + "< datetime('now', '-30 days');");
         } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        }
+    }
+    
+        public void  saveLog(File fileName) {
+        if (c == null) {
+            openDatabase();
+        }
+        try {
+            StringBuilder rowString = new StringBuilder();
+            Statement stmt = c.createStatement();
+            ResultSet result;
+            String sql = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + DATETIME + " DESC";
+            result = stmt.executeQuery(sql);
+            ResultSetMetaData metadata = result.getMetaData();
+            int columnCount = metadata.getColumnCount();
+            rowString.append("THIS FILE IS FOUO\n");
+            // Start at column 2. There is no need for the ID column to be exported
+            for (int i = 2; i <= columnCount; i++) {
+                rowString.append(metadata.getColumnName(i)).append(", ");
+            }
+            rowString.append("\n");
+            while (result.next()) {
+                //Start at column 2. There is no need for the IDs to be exported
+                for (int i = 2; i <= columnCount; i++) {
+                    rowString.append("\"").append(result.getString(i)).append("\"").append(", ");
+                }
+                rowString.append("\n");
+            }
+            Files.write(Paths.get(fileName.getCanonicalPath()), rowString.toString().getBytes());
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        } catch (IOException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
     }

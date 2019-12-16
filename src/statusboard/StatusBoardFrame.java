@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToggleButton;
@@ -47,6 +48,7 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
     private static int scannerTimeThreshold; // Time in milliseconds that the scanner should send it's input within
     private static boolean dimmed = false;
     private static Color lastScanColor = Color.GREEN;
+    private boolean scannerDisabled = false;
 
     private final CrewListModel coModel, xoModel, officerModel, chiefModel, engineeringModel, operationsModel, deckModel, supportModel, tdyModel;
 
@@ -516,7 +518,7 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
     }//GEN-LAST:event_logsButtonActionPerformed
 
     private void managerUsersButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_managerUsersButtonActionPerformed
-        displayUserList();
+        displayUserList("0");
     }//GEN-LAST:event_managerUsersButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -619,7 +621,7 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
     @Override
     public boolean dispatchKeyEvent(KeyEvent e) {
         // Don't capture teh keys if the add/edit user dialog is displayed
-        if (jdg.isVisible()) {
+        if (scannerDisabled) {
             return false;
         }
         switch (e.getID()) {
@@ -647,8 +649,19 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
                                 //lastScanNameLabel.setOpaque(true);
                             }
                         } else {
-                            displayAddEditUser();
-                            aem.setBarcodeText(keyInput.toString());
+                                    String[] options = { "New User", "Update Existing" };
+                                    int n = JOptionPane.showOptionDialog(
+                                        null,
+                                        "Is this a new or existing user?",
+                                        "Add or Update User",
+                                        JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, options, options[0]);   
+                            
+                                    if (n == 1) {
+                                        displayUserList(keyInput.toString());
+                                    } else {
+                                        displayAddEditUser();
+                                        aem.setBarcodeText(keyInput.toString());
+                                    }
                         }
                     }
                     keyInput = new StringBuilder();
@@ -672,7 +685,8 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         }
     }
 
-    private void displayAddEditUser() {
+    private void displayAddEditUser() {    
+        scannerDisabled = true;
         aem = new AddEditMember(jdg);
         jdg.setAutoRequestFocus(true);
         jdg.setSize(300, 400);
@@ -684,16 +698,18 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         jdg.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                scannerDisabled = false;
                 jdg.dispose();
             }
         });
     }
 
-    private void displayUserList() {
+    private void displayUserList(String barcode) {
+        scannerDisabled = true;
         if (jdg.isVisible()) {
             jdg.getContentPane().removeAll();
         }
-        userList = new UserList(jdg);
+        userList = new UserList(jdg, barcode);
         jdg.setAutoRequestFocus(true);
         jdg.setSize(280, 500);
         jdg.setResizable(false);
@@ -701,6 +717,12 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         jdg.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                scannerDisabled = false;
+                jdg.getContentPane().removeAll();
+                jdg.dispose();
+            }
+            public void windowClosed(WindowEvent e) {
+                scannerDisabled = false;
                 jdg.getContentPane().removeAll();
                 jdg.dispose();
             }
@@ -710,6 +732,7 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
     }
 
     private void displayLogList() {
+        scannerDisabled = true;
         if (jdg.isVisible()) {
             jdg.getContentPane().removeAll();
         }
@@ -720,6 +743,7 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
         jdg.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
+                scannerDisabled = false;
                 jdg.getContentPane().removeAll();
                 jdg.dispose();
             }

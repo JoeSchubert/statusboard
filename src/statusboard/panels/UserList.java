@@ -1,9 +1,12 @@
 package statusboard.panels;
 
+import java.awt.Window;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import statusboard.CrewMemberObject;
 import statusboard.StatusBoard;
 import static statusboard.StatusBoardFrame.backgroundColor;
 import static statusboard.StatusBoardFrame.foregroundColor;
@@ -17,9 +20,11 @@ public class UserList extends javax.swing.JPanel {
     private final UserListModel userListModel;
     private final JDialog aemDialog = new JDialog();
     private final RosterDataBaseHelper db = RosterDataBaseHelper.getInstance();
+    String barcode;
 
-    public UserList(JDialog jdiag) {
+    public UserList(JDialog jdiag, String updateBarcode) {
         jdg = jdiag;
+        barcode = updateBarcode;
         userListModel = new statusboard.models.UserListModel();
         initComponents();
         userListTable.setAutoResizeMode(0);
@@ -27,6 +32,17 @@ public class UserList extends javax.swing.JPanel {
         TableColumnAdjuster tca = new TableColumnAdjuster(userListTable, false);
         tca.adjustColumns();
         jdg.pack();
+        if (barcode.equals("0")) {
+            editButton.setVisible(true);
+            deleteButton.setVisible(true);
+            selectButton.setVisible(false);
+            jdg.setTitle("");
+        } else {
+            editButton.setVisible(false);
+            deleteButton.setVisible(false);
+            selectButton.setVisible(true);
+            jdg.setTitle("Select User to Update");
+        }
         jdg.setLocationRelativeTo(null);
         setupColors();
         jdg.setVisible(true);
@@ -47,6 +63,7 @@ public class UserList extends javax.swing.JPanel {
         userListTable = new javax.swing.JTable();
         deleteButton = new javax.swing.JButton();
         editButton = new javax.swing.JButton();
+        selectButton = new javax.swing.JButton();
 
         userListTable.setModel(userListModel);
         userListTable.setOpaque(false);
@@ -71,6 +88,13 @@ public class UserList extends javax.swing.JPanel {
             }
         });
 
+        selectButton.setText("Select");
+        selectButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -78,6 +102,8 @@ public class UserList extends javax.swing.JPanel {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(editButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(selectButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(deleteButton)
                 .addContainerGap())
@@ -89,7 +115,8 @@ public class UserList extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(editButton)
-                    .addComponent(deleteButton))
+                    .addComponent(deleteButton)
+                    .addComponent(selectButton))
                 .addContainerGap())
         );
 
@@ -137,12 +164,34 @@ public class UserList extends javax.swing.JPanel {
         userListModel.refreshUserListModel();
     }//GEN-LAST:event_deleteButtonActionPerformed
 
+    private void selectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectButtonActionPerformed
+        if (userListTable.getSelectedRow() != -1) {
+            CrewMemberObject cmo = userListModel.getMemberAtPos(userListTable.getSelectedRow());
+            db.insertRow(cmo.getId(), cmo.getPayGrade(), cmo.getRank(), cmo.getFirstName(), cmo.getLastName(), cmo.getDepartment(), barcode, true);
+            String[] options = {"OK"};
+            int n = JOptionPane.showOptionDialog(this,
+                   "User has been updated. ","Update Complete",
+                   JOptionPane.PLAIN_MESSAGE,
+                   JOptionPane.QUESTION_MESSAGE,
+                   null,
+                   options,
+                   options[0]);
+            
+            if(n == 0) {
+                // Trigger the window closing event so that the listener in StatusBoardFrame proper resets the scannerDisabled variable.
+                jdg.dispatchEvent(new WindowEvent((Window)jdg, WindowEvent.WINDOW_CLOSING));
+            }
+
+        }
+    }//GEN-LAST:event_selectButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton deleteButton;
     private javax.swing.JButton editButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton selectButton;
     private javax.swing.JTable userListTable;
     // End of variables declaration//GEN-END:variables
 
@@ -157,6 +206,8 @@ public class UserList extends javax.swing.JPanel {
         deleteButton.setForeground(foregroundColor);
         editButton.setBackground(backgroundColor);
         editButton.setForeground(foregroundColor);
+        selectButton.setBackground(backgroundColor);
+        selectButton.setForeground(foregroundColor);
         jScrollPane1.setBackground(backgroundColor);
         jScrollPane1.setForeground(foregroundColor);
         jScrollPane1.getViewport().setBackground(backgroundColor);

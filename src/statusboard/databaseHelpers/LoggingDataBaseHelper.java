@@ -143,7 +143,7 @@ public class LoggingDataBaseHelper {
         try {
             Statement stmt = c.createStatement();
             stmt.closeOnCompletion();
-            stmt.execute("DELETE FROM " + TABLE_NAME + " WHERE " + DATETIME + "< datetime('now', '-30 days');");
+            stmt.execute("DELETE FROM " + TABLE_NAME + " WHERE " + DATETIME + "< datetime('now', '-60 days');");
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }

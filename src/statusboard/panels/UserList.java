@@ -150,6 +150,9 @@ public class UserList extends javax.swing.JPanel {
             aemDialog.setVisible(true);
             aemDialog.addWindowListener(new WindowAdapter() {
                 @Override
+                public void windowClosing(WindowEvent e) {
+                    aemDialog.dispose();
+                }
                 public void windowClosed(WindowEvent e) {
                     userListModel.refreshUserListModel();
                     aemDialog.getContentPane().removeAll();

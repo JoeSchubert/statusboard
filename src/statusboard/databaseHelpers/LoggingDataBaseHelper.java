@@ -104,7 +104,7 @@ public class LoggingDataBaseHelper {
     // Helper function to log member edits
     public void logEditMember(String nPaygrade, String nRank, String nFName, String nLName, String nDept, String nBarcode,
             String oPaygrade, String oRank, String oFName, String oLName, String oDept, String oBarcode) {
-        String username = nLName + ", " + nLName;
+        String username = nLName + ", " + nFName;
         StringBuilder detail = new StringBuilder();
         detail.append("Changed information: \n");
         if (!nPaygrade.equals(oPaygrade)) {

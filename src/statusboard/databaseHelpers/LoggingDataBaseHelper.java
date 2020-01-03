@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import statusboard.CrewMemberObject;
 import statusboard.LogObject;
 
 public class LoggingDataBaseHelper {
@@ -99,22 +100,76 @@ public class LoggingDataBaseHelper {
         }
         return false;
     }
+    
+    // Helper function to log member edits
+    public void logEditMember(String nPaygrade, String nRank, String nFName, String nLName, String nDept, String nBarcode,
+            String oPaygrade, String oRank, String oFName, String oLName, String oDept, String oBarcode) {
+        String username = nLName + ", " + nLName;
+        StringBuilder detail = new StringBuilder();
+        detail.append("Changed information: \n");
+        if (!nPaygrade.equals(oPaygrade)) {
+            detail.append("Paygrade changed from: '").append(oPaygrade).append("' to '").append(nPaygrade).append(" ");
+        } if (!nRank.equals(oRank)) {
+            detail.append("Rank changed from: '").append(oRank).append("' to '").append(nRank).append(" ");
+        } if (!nFName.equals(oFName)) {
+            detail.append("First Name changed from: '").append(oFName).append("' to '").append(nFName).append(" ");
+        } if (!nLName.equals(oLName)) {
+            detail.append("Last Name changed from: '").append(oLName).append("' to '").append(nLName).append(" ");
+        } if (!nDept.equals(oDept)) {
+            detail.append("Department changed from: '").append(oDept).append("' to '").append(nDept).append(" ");
+        } if (!nBarcode.equals(oBarcode)) {
+            detail.append("Barcode changed from: '").append(oBarcode).append("' to '").append(nBarcode).append(" ");
+        }
+        logEvent(username, "Edit Member", "GUI", detail.toString());
+    }
+    
+    // Helper function to log member additions
+    public void logAddMember(String paygrade, String rank, String fName, String lName, String dept, String barcode) {
+        String username = lName + ", " + fName;
+        StringBuilder detail = new StringBuilder();
+        detail.append("Paygrade: ").append(paygrade).append(" ");
+        detail.append("First Name: ").append(fName).append(" ");
+        detail.append("Last Name: ").append(lName).append(" ");
+        detail.append("Department:  ").append(dept).append(" ");
+        detail.append("Barcode: ").append(barcode).append(" ");
+        logEvent(username, "Add Member", "GUI", detail.toString());
+    }
+    
+    // Helper function to log member deletion
+    public void logDeleteMember(String paygrade, String fName, String lName) {
+        String username = lName + ", " + fName;
+        logEvent(username, "Delete Member", "GUI", paygrade + " " + fName + " "+ lName);
+    }
+    
+    // Helper function to log member status toggle
+    public void logStatusToggle(String source, boolean status, CrewMemberObject cmo) {
+        String username = cmo.getLastName() + ", " + cmo.getFirstName();
+        String newStatus;
+        if (status == true) {
+            newStatus = "Ashore";
+        } else {
+            newStatus = "Afloat";
+        }
+        logEvent(username, "Toggle Status", source, newStatus);
+    }
 
-    public void logEvent(String event, String detail) {
+    public void logEvent(String username, String event, String source, String detail) {
         if (c != null) {
             try {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                 String ts = sdf.format(timestamp);
                 String sql;
-                sql = "INSERT INTO " + TABLE_NAME + "(" + DATETIME + "," + EVENT + ", " + DETAIL + ") "
-                        + "VALUES(?,?,?)";
+                sql = "INSERT INTO " + TABLE_NAME + "(" + DATETIME + "," + USERNAME + "," + EVENT + ", " + SOURCE + "," + DETAIL + ") "
+                        + "VALUES(?,?,?,?,?)";
 
                 PreparedStatement pstmt = c.prepareStatement(sql);
 
                 pstmt.setString(1, ts);
-                pstmt.setString(2, event);
-                pstmt.setString(3, detail);
+                pstmt.setString(2, username);
+                pstmt.setString(3, event);
+                pstmt.setString(4, source);
+                pstmt.setString(5, detail);
 
                 pstmt.executeUpdate();
             } catch (SQLException e) {

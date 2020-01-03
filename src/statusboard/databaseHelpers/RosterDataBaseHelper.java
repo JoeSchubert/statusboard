@@ -110,14 +110,14 @@ public class RosterDataBaseHelper {
             result = stmt.executeQuery("SELECT * FROM roster WHERE " + ID + "=" + id + ";");
             if (result.next()) {
                 // update existing row
-                logs.logEvent("Edit Member", "Existing information: " + result.getString(PAYGRADE) + ",  " + result.getString(RANK) + ", " + result.getString(FNAME) + ", " + result.getString(LNAME) + ", " + result.getString(DEPT) + ", " + result.getString(BARCODE)
-                        + " - New Information: " + paygrade + ", " + rank + ", " + fName + ", " + lName + ", " + department + ", " + barcode);
+                logs.logEditMember(result.getString(PAYGRADE), result.getString(RANK),  result.getString(FNAME), result.getString(LNAME),  result.getString(DEPT), result.getString(BARCODE),
+                       paygrade, rank ,fName, lName, department, barcode);
 
                 sql = "UPDATE " + TABLE_NAME + " SET " + PAYGRADE + " = ? , " + RANK + " = ?, " + FNAME + " = ? , " + LNAME + " = ? ," + DEPT + " = ? , " + BARCODE + " = ? , " + STATUS + " = ?  "
                         + "WHERE ID = " + id;
             } else {
                 // insert new row
-                logs.logEvent("Add Member", "Information: " + paygrade + ", " + rank + ", " + fName + ", " + lName + ", " + department + ", " + barcode);
+                logs.logAddMember(paygrade, rank,  fName, lName, department, barcode);
                 sql = "INSERT INTO " + TABLE_NAME + "(" + PAYGRADE + ", " + RANK + ", " + FNAME + ", " + LNAME + ", " + DEPT + " ," + BARCODE + ", " + STATUS + ") "
                         + "VALUES(?,?,?,?,?,?,?)";
             }
@@ -150,7 +150,7 @@ public class RosterDataBaseHelper {
             String sql;
             result = stmt.executeQuery("SELECT * FROM roster WHERE " + ID + "=" + cmo.getId() + ";");
             if (result.next()) {
-                logs.logEvent("Delete Member", "Delete: " + cmo.getRank() + " " + cmo.getFirstName() + " " + cmo.getLastName());
+                logs.logDeleteMember(cmo.getRank(), cmo.getFirstName(), cmo.getLastName());
                 sql = "DELETE from roster WHERE " + ID + "= " + cmo.getId();
                 PreparedStatement pstmt = c.prepareStatement(sql);
                 pstmt.executeUpdate();
@@ -163,24 +163,12 @@ public class RosterDataBaseHelper {
     }
 
     public boolean toggleCrewMemberStatusByClick(CrewMemberObject cmo, boolean status) {
-        String newStatus;
-        if (status == true) {
-            newStatus = "Ashore";
-        } else {
-            newStatus = "Afloat";
-        }
-        logs.logEvent("Status Toggle", "Source: Mouse Click - " + newStatus + " - " + cmo.getRank() + " " + cmo.getFirstName() + " " + cmo.getLastName());
+        logs.logStatusToggle("Mouse Click", status, cmo);
         return toggleCrewMemberStatus(cmo.getId(), status);
     }
 
     public boolean toggleCrewMemberStatusByScanner(CrewMemberObject cmo, boolean status) {
-        String newStatus;
-        if (status == true) {
-            newStatus = "Ashore";
-        } else {
-            newStatus = "Afloat";
-        }
-        logs.logEvent("Status Toggle", "Source: Barcode Scanner - " + newStatus + " - " + cmo.getRank() + " " + cmo.getFirstName() + " " + cmo.getLastName());
+        logs.logStatusToggle("Barcode Scanner", status, cmo);
         return toggleCrewMemberStatus(cmo.getId(), status);
     }
 

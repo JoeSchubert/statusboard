@@ -147,7 +147,9 @@ public class LoggingDataBaseHelper {
         try {
             // Read the values from the query into a LogObject
             log.setDatetime(result.getString(DATETIME))
+                    .setUsername(result.getString(USERNAME))
                     .setEvent(result.getString(EVENT))
+                    .setSource(result.getString(SOURCE))
                     .setDetail(result.getString(DETAIL));
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());

@@ -26,7 +26,7 @@ public class RosterDataBaseHelper {
     private final String STATUS = "STATUS";
     private final String LAST_SCAN = "LAST_SCAN";
     // This is the minimum version that is required for schema
-    private final int DB_VERSION = 1;
+    private final int DB_VERSION = DataBaseHelper.CURRENT_VERSION;
 
     public RosterDataBaseHelper() {
         if (existsTableRoster() == false) {

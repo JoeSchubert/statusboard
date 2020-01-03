@@ -14,15 +14,17 @@ ID and LAST_SCAN should be left blank. All other fields must be filed in. Status
 
 Once this is completed the file can be saved as a .csv file and imported into a database called StatusBoard.db in a table called "roster". An online tool such as https://sqliteonline.com/ should be able to import the .csv into a database and allow downloading.
 
-Currently accepted properties that can be controlled via config.properties in the base StatusBoard.jar director are:
+Currently accepted properties that can be controlled via a config.properties file in the base StatusBoard directory are:
 
 NightMode=true
 CutterName=USCGC Coast Guard Cutter
 ScannerTimeThreshold=1000
 
+These are the values that are used if no input is supplied.
+
 NightMode is automatically added/changed when clicking the NightMode toggle in the main frame.
 CutterName will set the cutter name at the top of the main frame and the title bar.
-ScannerTimeThreshold is the time in milliseconds that the barcode scanner should complete sending it's keystrokes in. Default is 1000 (1 second). This will be supplied even if the value is not set in config.properties.
+ScannerTimeThreshold is the time in milliseconds that the barcode scanner should complete sending it's keystrokes in.
 
 On windows the application can be launched by running Launch_StatusBoard.bat
-On linux the application can be launched by running Launch_StatusBoard.sh
+On linux the application can be launched by running Launch_StatusBoard.sh (this may need to be chmod +x or set to be executable first)

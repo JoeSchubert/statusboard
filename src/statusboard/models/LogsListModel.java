@@ -10,7 +10,7 @@ public class LogsListModel extends AbstractTableModel {
 
     private final LoggingDataBaseHelper db;
     private List<LogObject> rows = new ArrayList<>();
-    private static final String[] HEADERS = new String[]{"Time", "Event", "Detail"};
+    private static final String[] HEADERS = new String[]{"Time", "UserName", "Event", "Source", "Detail"};
 
     public LogsListModel() {
         db = LoggingDataBaseHelper.getInstance();
@@ -30,7 +30,7 @@ public class LogsListModel extends AbstractTableModel {
 
     @Override
     public int getColumnCount() {
-        return 3;
+        return 5;
     }
 
     @Override
@@ -41,6 +41,10 @@ public class LogsListModel extends AbstractTableModel {
             case 1:
                 return String.class;
             case 2:
+                return String.class;
+            case 3:
+                return String.class;
+            case 4:
                 return String.class;
         }
         return Object.class;
@@ -53,8 +57,12 @@ public class LogsListModel extends AbstractTableModel {
             case 0:
                 return log.getDatetime();
             case 1:
-                return log.getEvent();
+                return log.getUsername();
             case 2:
+                return log.getEvent();
+            case 3:
+                return log.getSource();
+            case 4:
                 return log.getDetail();
         }
         return null;

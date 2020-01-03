@@ -3,7 +3,9 @@ package statusboard;
 public class LogObject {
 
     private String datetime;
+    private String username;
     private String event;
+    private String source;
     private String detail;
 
     public String getDatetime() {
@@ -14,6 +16,15 @@ public class LogObject {
         this.datetime = datetime;
         return this;
     }
+    
+    public String getUsername() {
+        return username;
+    }
+    
+    public LogObject setUsername(String username) {
+        this.username = username;
+        return this;
+    }
 
     public String getEvent() {
         return event;
@@ -21,6 +32,15 @@ public class LogObject {
 
     public LogObject setEvent(String event) {
         this.event = event;
+        return this;
+    }
+    
+    public String getSource() {
+        return source;
+    }
+    
+    public LogObject setSource(String source) {
+        this.source = source;
         return this;
     }
 

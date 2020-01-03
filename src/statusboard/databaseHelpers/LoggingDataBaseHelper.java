@@ -24,13 +24,22 @@ public class LoggingDataBaseHelper {
     private static final String TABLE_NAME = "LOGS";
     private static final String ID = "ID";
     private static final String DATETIME = "DATETIME";
+    private static final String USERNAME = "USERNAME";
     private static final String EVENT = "EVENT";
+    private static final String SOURCE = "SOURCE";
     private static final String DETAIL = "DETAIL";
+    // This is the minimum version that is required for schema
+    private final int DB_VERSION = DataBaseHelper.CURRENT_VERSION;
 
     public LoggingDataBaseHelper() {
         c = dbh.getDatabaseConnection();
         if (existsTableLogs() == false) {
             createLogsTable();
+        } else {
+            int x = dbh.getDatabaseVersion();
+            if (x < DB_VERSION) {
+                updateTable(x);
+            }
         }
         pruneLogs();
     }
@@ -57,7 +66,9 @@ public class LoggingDataBaseHelper {
                         + TABLE_NAME + " "
                         + "(" + ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                         + DATETIME + " TEXT NOT NULL,"
+                        + USERNAME + " TEXT NOT NULL DEFAULT '',"
                         + EVENT + " TEXT NOT NULL,"
+                        + SOURCE + " TEXT NOT NULL DEFAULT '',"
                         + DETAIL + " TEXT NOT NULL)";
                 stmt.executeUpdate(sql);
                 stmt.close();
@@ -117,9 +128,9 @@ public class LoggingDataBaseHelper {
             openDatabase();
         }
         ArrayList<LogObject> logs = new ArrayList<>();
+        ResultSet result = null;
         try {
             Statement stmt = c.createStatement();
-            ResultSet result;
             String sql = "SELECT * FROM " + TABLE_NAME + " ORDER BY " + DATETIME + " DESC";
             result = stmt.executeQuery(sql);
             while (result.next()) {
@@ -151,7 +162,7 @@ public class LoggingDataBaseHelper {
         try {
             Statement stmt = c.createStatement();
             stmt.closeOnCompletion();
-            stmt.execute("DELETE FROM " + TABLE_NAME + " WHERE " + DATETIME + "< datetime('now', '-60 days');");
+            stmt.execute("DELETE FROM " + TABLE_NAME + " WHERE " + DATETIME + "< datetime('now', '-60 days');"); 
         } catch (SQLException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
@@ -188,5 +199,27 @@ public class LoggingDataBaseHelper {
         } catch (IOException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         }
+    }
+
+    private void updateTable(int v) {
+        if (c == null) {
+            openDatabase();
+        }
+        try {
+            // Version 2 - Version 1 only had Roster changes
+            if (v < 2) {
+                Statement stmt = c.createStatement();
+                stmt.closeOnCompletion();
+                String sql = "ALTER TABLE " + TABLE_NAME + " RENAME TO OLD_LOGS";
+                stmt.execute(sql);
+                createLogsTable();
+                sql = "INSERT INTO " + TABLE_NAME + "(" + DATETIME + ", " + EVENT + ", " + DETAIL + ") SELECT " + DATETIME + ", " + EVENT + ", " + DETAIL + " FROM OLD_LOGS";
+                stmt.execute(sql);
+                //Hacky - dropt the OLD_LOGS table during the pruning if it still exists. JDBC kept reporting that the database was locked when trying to do it here.
+                stmt.execute("DROP TABLE IF EXISTS OLD_LOGS");
+            }
+        } catch (SQLException e) {
+            System.err.println(e.getClass().getName() + ": " + e.getMessage());
+        } 
     }
 }

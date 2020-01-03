@@ -12,7 +12,7 @@ public class DataBaseHelper {
     private static Connection c = null;
     static Constants con = new Constants();
     static int existingVersion = -1;
-    public static final int CURRENT_VERSION = 1;
+    public static final int CURRENT_VERSION = 2;
 
     public DataBaseHelper() {
         if (c == null) {

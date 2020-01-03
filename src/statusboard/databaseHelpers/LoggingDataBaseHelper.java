@@ -70,12 +70,20 @@ public class LoggingDataBaseHelper {
 
     private boolean existsTableLogs() {
         if (c != null) {
+            ResultSet tables = null;
             try {
                 DatabaseMetaData dbm = c.getMetaData();
-                ResultSet tables = dbm.getTables(null, null, TABLE_NAME, null);
+                tables = dbm.getTables(null, null, TABLE_NAME, null);
                 return tables.next();
             } catch (SQLException e) {
                 System.err.println(e.getClass().getName() + ": " + e.getMessage());
+            } finally {
+                try { 
+                    if (tables != null) {
+                        tables.close();
+                    } 
+                } catch (Exception e) {
+                }
             }
         }
         return false;

@@ -14,9 +14,12 @@ public class Settings {
     private static Properties props;
     private static final String CONFIG_FILE = "config.properties";
     private static LocalTime startDim = null, stopDim = null;
-    private static Boolean autoDimEnabled = null;
+    private static boolean autoDimEnabled;
     private static Integer dimPercent = null;
     private static boolean audibleFeedback;
+    private static String cutterName;
+    private static boolean nightMode;
+    private static int scannerTimeThreshold;
 
     OutputStream output = null;
     InputStream input = null;
@@ -39,7 +42,6 @@ public class Settings {
             props = new Properties();
             input = new FileInputStream(CONFIG_FILE);
             props.load(input);
-            audibleFeedback = getBoolean("audibleFeedback", true);
         } catch (IOException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         } finally {
@@ -51,7 +53,19 @@ public class Settings {
                     System.err.println(e.getClass().getName() + ": " + e.getMessage());
                 }
             }
+            setupVars();
         }
+    }
+    
+    private void setupVars() {
+            dimPercent = getInt("DimPercent", 50);
+            startDim = LocalTime.parse(getString("startDim", "20:00:00"));
+            stopDim = LocalTime.parse(getString("stopDim", "06:00:00"));
+            autoDimEnabled = getBoolean("autoDimEnabled", false);
+            audibleFeedback = getBoolean("audibleFeedback", true);
+            cutterName = getString("CutterName", "Coast Guard Cutter");
+            nightMode = getBoolean("NightMode", false);
+            scannerTimeThreshold = getInt("ScannerTimeThreshold", 1000);
     }
 
     private void saveProps() {
@@ -112,10 +126,11 @@ public class Settings {
 
     public void setNightMode(boolean status) {
         storeBoolean("NightMode", status);
+        nightMode = status;
     }
 
     public boolean getNightMode() {
-        return getBoolean("NightMode", false);
+        return nightMode;
     }
 
     public void setCutterName(String name) {
@@ -124,38 +139,26 @@ public class Settings {
     }
 
     public String getCutterName() {
-        return getString("CutterName", "Coast Guard Cutter");
+        return cutterName;
     }
 
     public int getScannerTimeThreshold() {
-        return getInt("ScannerTimeThreshold", 1000);
+        return scannerTimeThreshold;
     }
 
     public LocalTime getStartDim() {
-        if (startDim == null) {
-            startDim = LocalTime.parse(getString("startDim", "20:00:00"));
-        }
         return startDim;
     }
 
     public LocalTime getStopDim() {
-        if (stopDim == null) {
-            stopDim = LocalTime.parse(getString("stopDim", "06:00:00"));
-        }
         return stopDim;
     }
     
     public boolean autoDimEnabled() {
-        if (autoDimEnabled == null) {
-            autoDimEnabled = getBoolean("autoDimEnabled", false);
-        }
         return autoDimEnabled; 
     }
     
     public int getDimPercent() {
-        if (dimPercent == null) {
-            dimPercent = getInt("DimPercent", 50);
-        }
         return dimPercent;
     }
     

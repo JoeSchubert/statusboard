@@ -642,10 +642,14 @@ public final class StatusBoardFrame extends javax.swing.JFrame implements KeyEve
                             if (cm.isStatus()) {
                                 lastScanColor = Color.RED;
                                 lastScanNameLabel.setForeground(lastScanColor);
+                                Audible audible = new Audible();
+                                audible.play(Audible.ASHORE);
                                 //lastScanNameLabel.setOpaque(true);
                             } else {
                                 lastScanColor = Color.GREEN;
                                 lastScanNameLabel.setForeground(lastScanColor);
+                                Audible audible = new Audible();
+                                audible.play(Audible.AFLOAT);
                                 //lastScanNameLabel.setOpaque(true);
                             }
                         } else {

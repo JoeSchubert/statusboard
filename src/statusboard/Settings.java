@@ -16,6 +16,7 @@ public class Settings {
     private static LocalTime startDim = null, stopDim = null;
     private static Boolean autoDimEnabled = null;
     private static Integer dimPercent = null;
+    private static boolean audibleFeedback;
 
     OutputStream output = null;
     InputStream input = null;
@@ -38,6 +39,7 @@ public class Settings {
             props = new Properties();
             input = new FileInputStream(CONFIG_FILE);
             props.load(input);
+            audibleFeedback = getBoolean("audibleFeedback", true);
         } catch (IOException e) {
             System.err.println(e.getClass().getName() + ": " + e.getMessage());
         } finally {
@@ -155,6 +157,10 @@ public class Settings {
             dimPercent = getInt("DimPercent", 50);
         }
         return dimPercent;
+    }
+    
+    public boolean audibleFeedback() {
+        return audibleFeedback; 
     }
 
 }

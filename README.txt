@@ -19,12 +19,22 @@ Currently accepted properties that can be controlled via a config.properties fil
 NightMode=true
 CutterName=USCGC Coast Guard Cutter
 ScannerTimeThreshold=1000
+audibleFeeback=true
+autoDimEnabled=false
+startDim=20:00:00
+stopDim=06:00:00
+DimPercent=50
 
 These are the values that are used if no input is supplied.
 
 NightMode is automatically added/changed when clicking the NightMode toggle in the main frame.
 CutterName will set the cutter name at the top of the main frame and the title bar.
 ScannerTimeThreshold is the time in milliseconds that the barcode scanner should complete sending it's keystrokes in.
+audibleFeeback determines whether sounds will be played for barcode swipes
+autoDimEnabled determines whether or not to dim the laptop screen
+  startDim sets the time to start dimming the screen
+  stopDim sets the time to return to full brightness
+  DimPercent sets the brightness percentage
 
 On windows the application can be launched by running Launch_StatusBoard.bat
 On linux the application can be launched by running Launch_StatusBoard.sh (this may need to be chmod +x or set to be executable first)
